@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+  />
+  <meta name="format-detection" content="telephone=no" />
+  <style>
+    .pay-money {
+      font-size: .8em;
+      color: #007aff;
+    }
+
+    .way-title {
+      padding: 0.8rem 0;
+      color: #666;
+      text-align: center;
+      margin: 0.5rem 0;
+      background: repeating-linear-gradient(45deg, #ffffff 10px, #eaedef 15px);
+    }
+
+    .pay-ways {
+      background-color: #fff;
+      box-align: center;
+      display: box;
+      border-bottom: #D9D9D9 solid 1px;
+    }
+
+    .pay-ways .pay-type {
+      color: #666;
+      padding: 0 .5rem;
+      height: 3rem;
+      line-height: 3rem;
+      font-size: 1em;
+      background-color: #fff;
+      padding-left: 2.5rem;
+      background-position: left;
+      background-repeat: no-repeat;
+    }
+
+    .way-zhifubao {
+      background-image: url(../../image/medicare/zhifubao.png);
+    }
+
+    .way-weixin {
+      background-image: url(../../image/medicare/weixin.png);
+    }
+
+    .way-yinlian {
+      background-image: url(../../image/medicare/yinlian.png);
+    }
+
+    .pay-hidden-box * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      cursor: default;
+      user-select: none;
+    }
+    .pay-hidden-box {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.3);
+      display: none;
+    }
+    
+    .pay-hidden-box {
+      display: block;
+    }
+    .pay-hidden-box .content {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: #F8F6F9;
+    }
+
+    .pay-hidden-box .content .header {
+      position: relative;
+      text-align: center;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .pay-hidden-box .header .btn-close {
+      position: absolute;
+      right: 5px;
+      width: 24px;
+      height: 24px;
+    }
+    .pay-hidden-box .header .btn-close:active,
+    .pay-hidden-box .header .btn-close:focus {
+      background-color: #ccc;
+    }
+
+    .pay-hidden-box .password-box {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .pay-hidden-box .password-box input {
+      width: 45px;
+      height: 40px;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      outline: none;
+    }
+    .pay-hidden-box .keyboard-box {}
+
+    .keyboard-box .keyboard {
+      float: right;
+      width: 100%;
+      background-color: #fff;
+      border-right: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+    .keyboard-box .keyboard .key {
+      float: left;
+      width: 33.3%;
+      text-align: center;
+      box-sizing: border-box;
+      border-collapse: collapse;
+      border-left: 1px solid #eee;
+      border-top: 1px solid #eee;
+      padding: 15px 0;
+      list-style-type: none;
+    }
+    .keyboard-box .keyboard .key:active,
+    .keyboard-box .keyboard .key:focus {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pay-hidden-box">
+    <div class="content">
+      <div class="header">
+        <span>请输入密码</span>
+        <span class="btn-close">&times;</span>
+      </div>
+      <div class="password-box">
+        <input type="password" name="p1">
+        <input type="password" name="p2">
+        <input type="password" name="p3">
+        <input type="password" name="p4">
+        <input type="password" name="p5">
+        <input type="password" name="p6">
+      </div>
+      <div class="keyboard-box">
+        <ul class="keyboard">
+          <li class="key">1</li>
+          <li class="key">2</li>
+          <li class="key">3</li>
+          <li class="key">4</li>
+          <li class="key">5</li>
+          <li class="key">6</li>
+          <li class="key">7</li>
+          <li class="key">8</li>
+          <li class="key">9</li>
+          <li class="key">.</li>
+          <li class="key">0</li>
+          <li class="key">清除</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

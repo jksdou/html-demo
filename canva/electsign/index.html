@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Canvas签名Demo</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="canvasDiv">
+    <div id="editing_area">
+      <canvas width="600" height="250" id="canvasEdit"></canvas>
+    </div>
+  </div>
+
+  <div class="imgDiv">
+    <span id="sign_show"></span>
+  </div>
+
+  <div class="btnDiv">
+    <a id="sign_clear" class="clearBtn">清除</a>
+    <a id="sign_ok" class="okBtn">确认</a>
+  </div>
+
+  <script type="text/javascript" src="https://unpkg.com/jquery@3.2.1/dist/jquery.js"></script>
+  <script type="text/javascript" src="esign.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      //初始化动作，根据DOM的ID不同进行自定义，如果不写则内部默认取这四个
+      $().esign("canvasEdit", "sign_show", "sign_clear", "sign_ok");
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    .demo {
+      width: 300px;
+      height: 200px;
+      border: 1px solid #ccc;
+      margin: 100px auto;
+      position: relative;
+    }
+
+    .icon-close {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      padding: 5px;
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      z-index: 2;
+    }
+
+    .icon-close:hover {
+      border: 1px solid #ccc;
+    }
+
+    .icon-close:hover::before {
+      background-color: #ccc;
+    }
+
+    .icon-close:hover::after {
+      background-color: #ccc;
+    }
+
+    .icon-close::before {
+      content: "";
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+      width: 1px;
+      height: 17px;
+      background-color: #ddd;
+      overflow: hidden;
+      position: absolute;
+      top: 5px;
+      left: 13px;
+    }
+
+    .icon-close::after {
+      content: "";
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      width: 1px;
+      height: 17px;
+      background-color: #ccc;
+      overflow: hidden;
+      position: absolute;
+      top: 5px;
+      right: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="demo">
+    <div class="icon-close"></div>
+  </div>
+
+</body>
+
+</html>

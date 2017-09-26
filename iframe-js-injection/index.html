@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="javascript" />
+  <meta name="description" content="" />
+  <title>演示：Javascript实现iframe注入</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="row">
+        <div class="col-md-3 col-xs-12">
+          <h1 class="logo">测试</h1>
+        </div>
+        <div class="col-md-9 text-right"></div>
+      </div>
+    </header>
+    <div class="row main" style="min-height:500px">
+      <div class="col-md-12">
+        <h2 class="top_title">演示：Javascript实现iframe注入</h2>
+        <div class="row" style="margin-top:30px">
+          <div class="col-md-12">
+            <iframe name="content" src="img/1.jpg"></iframe>
+          </div>
+          <div class="col-md-7">
+            <div id="result"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    from
+    <footer>
+      <p>Powered by <a href="#">#</a></p>
+    </footer>
+  </div>
+  <script type="text/javascript">
+    var test = window.frames['content'].Window;
+    test.document.write("<body >123123</body>");
+    test.document.close();
+    alert(test.document.body.innerHTML)
+  </script>
+</body>
+
+</html>
