@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>JS 随机数生成算法</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <p>
+        最大数：
+        <input type="text" value="5" id="n" />
+        <button onclick="generate()">生成</button>
+    </p>
+    <p>随机数：<span id="result"></span></p>
+    <script src="rand.js"></script>
+    <script>
+        function generate() {
+            this.n = document.getElementById('n').value
+            if (this.n == '' || this.n == undefined) {
+                this.n = 5
+                document.getElementById('n').value = 5
+            }
+            this.text = rand(Number(this.n))
+            document.getElementById('result').innerHTML = this.text
+        }
+    </script>
+</body>
+
+</html>
