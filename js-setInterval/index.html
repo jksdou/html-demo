@@ -3,6 +3,11 @@
 
 <head>
   <title>定时器加参数</title>
+  <style>
+    #record {
+      word-break: break-word;
+    }
+  </style>
 </head>
 
 <body>
@@ -62,8 +67,7 @@
     if (Number(num.innerHTML) == 0) {
       return;
     }
-    record.innerHTML += '<div>' + num.innerHTML + '</div>';
-    // num.innerHTML = 0;
+    Number(record.innerHTML) == 0 ? record.innerHTML += '<span>' + num.innerHTML + '</span>' : record.innerHTML += ',<span>' + num.innerHTML + '</span>';
   }
 
   function updateValue(x, t) {
