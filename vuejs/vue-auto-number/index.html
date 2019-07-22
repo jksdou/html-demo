@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>demo for input-select</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <index></index>
+    </div>
+    <script src="../vue.min.js"></script>
+    <script src="../babel.min.js"></script>
+    <template id="components-index">
+        <div class="auto-number">
+            <h1>自增数字</h1>
+            <!-- 使用范例 start -->
+            <auto-number ref="autoNumber"
+                :auto-number="numbers"
+                :time="time"
+                :auto="auto">
+                <template slot-scope="$scope">
+                    <p>一般使用形式</p>
+                    <h2>{{parseInt(scope.autoNumber[0])}}</h2>
+                    <h2 class="text-red">{{parseInt(scope.autoNumber[1])}}</h2>
+                    <h2>{{parseInt(scope.autoNumber[2])}}</h2>
+                    <p>特殊使用方式</p>
+                    <h2>带浮点数： {{scope.autoNumber[0]}}</h2>
+                    <h2>组合小数：{{parseInt(scope.autoNumber[1])}}.{{parseInt(scope.autoNumber[2])}}</h2>
+                </template>
+            </auto-number>
+            <!-- 使用范例 end -->
+            <hr />
+            <h2>函数：run()</h2>
+            <p><button @click="$refs.autoNumber.run()">开始</button></p>
+            <hr />
+            <h2>函数：reset()</h2>
+            <p><button @click="$refs.autoNumber.reset()">重置</button></p>
+            <hr />
+            <h2>设置</h2>
+            <p>时长设置：<input type="number" v-model="time" min="1000" max="5000" /></p>
+        </div>
+    </template>
+    <template id="components-auto-number">
+        <div>
+            <slot name="default" v-bind:autoNumber="numbers"></slot>
+        </div>
+    </template>
+    <script type="text/babel">
+        var componentsAutoNumber = {
+            template: '#components-auto-number', // 必须绑定一个模板
+            data () {
+                return {
+                    numbers: [], // 最终展示的数据
+                    interval: [], // 数字递增间距
+                    running: false // 正在运行
+                }
+            },
+            props: {
+                auto: { // 是否渲染时就执行
+                    type: Boolean,
+                    default: false
+                },
+                autoNumber: { // 需要显示的自增数字
+                    type: Array
+                },
+                time: { // 自增结束所用时长, 单位毫秒
+                    type: Number,
+                    default: 1500
+                }
+            },
+            mounted () {
+                if (this.auto) {
+                    // 自动运行
+                    this.rotateNumber()
+                } else {
+                    // 重置为0
+                    this.initDefaultNumbers()
+                }
+            },
+            methods: {
+                initDefaultNumbers () {
+                    // 初始化当前默认的数字列表
+                    if (this.autoNumber) {
+                        this.numbers = this.autoNumber.map(item => {
+                            return 0
+                        })
+                    }
+                },
+                rotateNumber () {
+                    if (!this.autoNumber || this.running) {
+                        return
+                    }
+                    this.initDefaultNumbers()
+
+                    // 递增大小
+                    this.interval = this.autoNumber.map(item => {
+                        return item * 17 / this.time
+                    })
+                    this.autoNumber.forEach((eachVal, index) => {
+                        let tt = () => {
+                            // console.log(this.interval, index)
+                            if (this.numbers[index] <= this.autoNumber[index]) {
+                                if (this.numbers[index] + this.interval[index] > this.autoNumber[index]) {
+                                    this.numbers[index] = this.autoNumber[index]
+                                    this.$forceUpdate()
+                                    this.running = false
+                                    return
+                                } else {
+                                    this.running = true
+                                    this.numbers[index] = this.numbers[index] + this.interval[index]
+                                }
+                            } else {
+                                // console.log('执行', this.numbers[index])
+                                this.running = true
+                                this.numbers[index] = this.numbers[index] + this.interval[index]
+                            }
+                            this.numbers[index].toFixed(2)
+                            this.$forceUpdate()
+                            requestAnimationFrame(tt)
+                        }
+                        tt()
+                    })
+                },
+                run () {
+                    // 运行
+                    this.rotateNumber()
+                },
+                reset () {
+                    // console.log('重置')
+                    if (!this.running && this.autoNumber) {
+                        this.initDefaultNumbers()
+                        this.$forceUpdate()
+                    }
+                }
+            }
+        };
+        var componentsIndex = {
+            template: '#components-index', // 必须绑定一个模板
+            data () {
+                return {
+                    auto: true, // 设置自动运行
+                    time: 1000, // 设置运行时间长度
+                    numbers: [2300.33, 3456, 56]
+                }
+            },
+            components: {
+                'auto-number': componentsAutoNumber
+            }
+        };
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello World!'
+            },
+            // template: '#app',
+            components: {
+                'index': componentsIndex
+            }
+        });
+    </script>
+</body>
+
+</html>

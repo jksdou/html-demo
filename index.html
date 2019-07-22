@@ -1,59 +1,101 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="zh-CN">
 
 <head>
-  <title>demo</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-  <meta name="Keywords" content="demo, js, css, html, doudoudzj" />
-  <meta name="Description" content="demo" />
-  <style>
-    body { margin: 0 auto; width: auto; }
-    .header, .nav, .content, .footer { padding: 10px; }
-    .container {min-width: 666px; margin: 10px auto; width: 60%; max-width: 800px;}
-    .title {width: 200px; height: 28px;}
-    .content {background-color: #eee;}
-    .nav, .footer {color: #fff; background-color: #6fb9f5;}
-    .footer a {color: #fff;}
-  </style>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Crogram Inc." />
+    <meta name="keywords" content="demo, JS, CSS, HTML, doudoudzj" />
+    <meta name="author" content="doudoudzj(唐钰豆豆)" />
+    <link rel="icon" href="favicon.ico" />
+    <title>代码片段、示例代码</title>
+    <link href="assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet" /> -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- <script src="assets/js/ie-emulation-modes-warning.js"></script> -->
+    <!--[if lt IE 9]>
+      <script src="assets/lib/html5shiv/html5shiv.min.js"></script>
+      <script src="assets/lib/respond/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body>
-  <div class="container">
-    <div class="header"><h2 class="title">demo</h2></div>
-    <div class="nav">This is the default index file</div>
-    <div class="content">
-      <p><a href="./canva/electsign/index.html">e-Sign</a></p>
-      <p><a href="./canva/round-clock/index.html">Round-Clock</a></p>
-      <p><a href="./css-table/index.html">CSS-Table</a></p>
-      <p><a href="./css-icon/icon-close.html">css-icon</a></p>
-      <p><a href="./css3-checkout-box-check-effect/index.html">css3-checkout-box-check-effect</a></p>
-      <p><a href="./css3-input-radio/index.html">css3-input-radio</a></p>
-      <p><a href="./css3-js-sonw/index.html">css3-js-sonw</a></p>
-      <p><a href="./html-contenteditable/index.html">html-contenteditable</a></p>
-      <p><a href="./html-iframe-event/index.html">html-iframe-event</a></p>
-      <p><a href="./html-page-error/400.html">html-page-error-400</a></p>
-      <p><a href="./html-page-error/404.html">html-page-error-404</a></p>
-      <p><a href="./html-page-pay-on-mobile/pay.html">html-page-pay-on-mobile</a></p>
-      <p><a href="./HTML5 localStorage 页面数据同步demo/localStorage1.html">HTML5 localStorage 页面数据同步demo1</a></p>
-      <p><a href="./HTML5 localStorage 页面数据同步demo/localStorage2.html">HTML5 localStorage 页面数据同步demo2</a></p>
-      <p><a href="./HTML5 localStorage 页面数据同步demo/localStorage3.html">HTML5 localStorage 页面数据同步demo3</a></p>
-      <p><a href="./iframe-js-injection/index.html">iframe-js-injection</a></p>
-      <p><a href="./iframe-print/index.html">iframe-print</a></p>
-      <p><a href="./js- zoom-image-equal-ratios/index.html">js- zoom-image-equal-ratios</a></p>
-      <p><a href="./js-drag-and-drop/index.html">js-drag-and-drop</a></p>
-      <p><a href="./js-file/index.html">js-file</a></p>
-      <p><a href="./js-rand/index.html">JS 随机数生成算法</a></p>
-      <p><a href="./js-router/index.html">js-router</a></p>
-      <p><a href="./js-simulation-scroll-bar/index.html">js-simulation-scroll-bar</a></p>
-      <p><a href="./js-tooltip/index.html">js-tooltip</a></p>
-      <p><a href="./test_scroll_on_safari/index.html">test_scroll_on_safari</a></p>
-      <p><a href="./uiisc-html/index.html">uiisc-default-index</a></p>
-      <p><a href="./vuejs/hello-world.html">vuejs-hello-world</a></p>
-      <p><a href="./WebGL-high-performance-fireworks-blooming-animation/index.html">WebGL-high-performance-fireworks-blooming-animation</a></p>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">DEMO</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <p class="navbar-text">代码片段、示例代码</p>
+                    <!-- <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li> -->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="https://github.com/doudoudzj/codes" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </nav>
     </div>
-    <div class="footer">by <a href="https://github.com/doudoudzj/codes" target="blank">doudoudzj</a></div>
-  </div>
+    <div class="container">
+        <p><a href="./canva/electsign/index.html">e-Sign</a></p>
+        <p><a href="./canva/round-clock/index.html">Round-Clock</a></p>
+        <p><a href="./css-table/index.html">CSS-Table</a></p>
+        <p><a href="./css-icon/icon-close.html">css-icon</a></p>
+        <p><a href="./css3-checkout-box-check-effect/index.html">css3-checkout-box-check-effect</a></p>
+        <p><a href="./css3-input-radio/index.html">css3-input-radio</a></p>
+        <p><a href="./css3-js-sonw/index.html">css3-js-sonw</a></p>
+        <p><a href="./html-contenteditable/index.html">html-contenteditable</a></p>
+        <p><a href="./html-iframe-event/index.html">html-iframe-event</a></p>
+        <p><a href="./html-page-error/400.html">html-page-error-400</a></p>
+        <p><a href="./html-page-error/404.html">html-page-error-404</a></p>
+        <p><a href="./html-page-pay-on-mobile/pay.html">html-page-pay-on-mobile</a></p>
+        <p><a href="./HTML5 localStorage 页面数据同步demo/localStorage1.html">HTML5 localStorage 页面数据同步demo1</a></p>
+        <p><a href="./HTML5 localStorage 页面数据同步demo/localStorage2.html">HTML5 localStorage 页面数据同步demo2</a></p>
+        <p><a href="./HTML5 localStorage 页面数据同步demo/localStorage3.html">HTML5 localStorage 页面数据同步demo3</a></p>
+        <p><a href="./iframe-js-injection/index.html">iframe-js-injection</a></p>
+        <p><a href="./iframe-print/index.html">iframe-print</a></p>
+        <p><a href="./js- zoom-image-equal-ratios/index.html">js- zoom-image-equal-ratios</a></p>
+        <p><a href="./js-drag-and-drop/index.html">js-drag-and-drop</a></p>
+        <p><a href="./js-file/index.html">js-file</a></p>
+        <p><a href="./js-rand/index.html">JS 随机数生成算法</a></p>
+        <p><a href="./js-router/index.html">js-router</a></p>
+        <p><a href="./js-simulation-scroll-bar/index.html">js-simulation-scroll-bar</a></p>
+        <p><a href="./js-tooltip/index.html">js-tooltip</a></p>
+        <p><a href="./test_scroll_on_safari/index.html">test_scroll_on_safari</a></p>
+        <p><a href="./uiisc-html/index.html">uiisc-default-index</a></p>
+        <p><a href="./vuejs/hello-world.html">vuejs-hello-world</a></p>
+        <!-- <p><a href="./vuejs/vue-auto-number/index.html">vue-auto-number</a></p> -->
+        <p><a href="./WebGL-high-performance-fireworks-blooming-animation/index.html">WebGL-high-performance-fireworks-blooming-animation</a></p>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">
+                <span> 2019 by <a href="https://github.com/doudoudzj/codes" target="blank">doudoudzj</a></span>
+            </p>
+        </div>
+    </footer>
+    <script src="assets/lib/jquery/jquery.min.js"></script>
+    <script src="assets/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 
 </html>
