@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>原生JS随机颜色9x9乘法表</title>
+    <style>
+        table {
+            width: 800px;
+            height: 500px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        td {
+            border: 1px solid #000;
+            color: #fff;
+            vertical-align: middle;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oTable = document.getElementsByTagName("table")[0];
+            var sColor = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+            for (var i = 1; i < 10; i++) {
+                var oTr = document.createElement("tr");
+                for (var j = 1; j < 10; j++) {
+                    var nColor = "#";
+                    for (var n = 0; n < 6; n++) {
+                        var nRandom = parseInt(Math.random() * sColor.length);
+                        nColor += sColor[nRandom];
+                    }
+                    if (j <= i) {
+                        var oTd = document.createElement("td");
+                        oTd.innerHTML = j + "×" + i + "=" + i * j;
+                        oTd.style.backgroundColor = nColor;
+
+                    }
+                    oTr.appendChild(oTd);
+                }
+                oTable.appendChild(oTr);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <table></table>
+</body>
+
+</html>

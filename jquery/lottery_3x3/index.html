@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery 动态九宫格抽奖</title>
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        .luckyDraw {
+            width: 420px;
+            margin: 0 auto;
+        }
+
+        .prize {
+            font-size: 30px;
+        }
+
+        .lottery {
+            width: 240px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .lottery li {
+            width: 80px;
+            height: 80px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 80px;
+            position: absolute;
+        }
+
+        .lottery li:nth-of-type(1) {
+            left: 0;
+            top: 0;
+        }
+
+        .lottery li:nth-of-type(2) {
+            left: 80px;
+            top: 0;
+        }
+
+        .lottery li:nth-of-type(3) {
+            left: 160px;
+            top: 0;
+        }
+
+        .lottery li:nth-of-type(4) {
+            left: 160px;
+            top: 80px;
+        }
+
+        .lottery li:nth-of-type(5) {
+            left: 160px;
+            top: 160px;
+        }
+
+        .lottery li:nth-of-type(6) {
+            left: 80px;
+            top: 160px;
+        }
+
+        .lottery li:nth-of-type(7) {
+            left: 0;
+            top: 160px;
+        }
+
+        .lottery li:nth-of-type(8) {
+            left: 0;
+            top: 80px;
+        }
+
+        .lottery li:nth-of-type(9) {
+            left: 80px;
+            top: 80px;
+            cursor: pointer;
+            background: gold;
+        }
+
+        .active:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="luckyDraw">
+        <ul class="lottery">
+            <li class="active">华为</li>
+            <li class="qw rt">三星</li>
+            <li>乐视</li>
+            <li>QQ</li>
+            <li>苹果</li>
+            <li>优惠券</li>
+            <li>谢谢参与</li>
+            <li>特等奖</li>
+            <li id="me">点击</li>
+        </ul>
+        <span class="prize">其它</span>
+    </div>
+
+    <script type="text/javascript" src="/assets/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="js/encryption-win.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            document.querySelector('#me').addEventListener('click', function () {
+                $.ajax({
+                    url: './winData.json',
+                    method: 'get',
+                    success: function (data) {
+                        new Win({
+                            el: '.lottery', //抽奖元素的父级
+                            startIndex: 2, //从第几个位置开始抽奖 [默认为零]
+                            totalCount: 4, //一共要转的圈数
+                            // winningIndex: data.win, //中奖的位置索引[1-8] 后台返回的中奖数字
+                            winningIndex: 3, //模拟写死的,实际效果可接受后台返回
+                            speed: 50 //抽奖动画的速度 [数字越大越慢,默认100]
+                        }, function () { //中奖后的回调函数
+                            //do something
+                            $('.lottery li').each(function () {
+                                if ($(this).hasClass('active')) {
+                                    //打印当前中奖信息
+                                    console.log($(this).html());
+                                    $('.prize').html($(this).html());
+                                }
+                            });
+                        });
+                    }
+                });
+            })
+        }); //end function
+    </script>
+</body>
+
+</html>

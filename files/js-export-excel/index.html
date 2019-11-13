@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS 将table数据导出到Excel文件下载</title>
+</head>
+
+<body>
+    <style>
+        #tables {
+            width: 100%;
+            text-align: center;
+            border: 1px #000 solid;
+            border-collapse: collapse;
+        }
+
+        #tables th,
+        #tables td {
+            border: 1px solid #000000;
+        }
+
+        #tables th {
+            font-size: 14px;
+            font-weight: bolder;
+        }
+    </style>
+    <table id="tables">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>地址</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>大海</td>
+                <td>男</td>
+                <td>17</td>
+                <td>江苏省徐州市</td>
+            </tr>
+            <tr>
+                <td>大海</td>
+                <td>男</td>
+                <td>17</td>
+                <td>江苏省徐州市</td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="button" id="export" value="导出" />
+
+    <script src="/assets/lib/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="lib/tableExport.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="lib/base64.min.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>
+<script>
+    $("#export").click(function () {
+        //导出
+        $("#tables").tableExport({
+            type: "excel",
+            fileName: 'aaa'
+        });
+    });
+</script>

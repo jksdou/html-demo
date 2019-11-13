@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Canvas 电子签名 e-Sign</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="canvasDiv center">
+        <div id="editing_area">
+            <canvas width="600" height="250" id="canvasEdit"></canvas>
+        </div>
+    </div>
+    <div class="btnDiv center">
+        <a id="sign_clear" class="clearBtn">清除</a>
+        <a id="sign_ok" class="okBtn">确认</a>
+    </div>
+    <div class="imgDiv center">
+        <div id="sign_show">点击确定生成签名</div>
+    </div>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@3.2.1/dist/jquery.js"></script>
+    <script type="text/javascript" src="js/esign.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //初始化动作，根据DOM的ID不同进行自定义，如果不写则内部默认取这四个
+            $().esign("canvasEdit", "sign_show", "sign_clear", "sign_ok");
+        });
+    </script>
+
+</body>
+
+</html>

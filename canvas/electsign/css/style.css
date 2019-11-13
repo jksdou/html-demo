@@ -1,0 +1,37 @@
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.canvasDiv {
+    height: 250px;
+    width: 600px;
+    border: 1px solid #ddd;
+}
+
+.imgDiv {
+    height: 100px;
+    width: 200px;
+    border: 1px solid #ddd;
+    margin-top: 15px;
+}
+
+.btnDiv {
+    height: 100px;
+    width: 600px;
+    margin-top: 15px;
+}
+
+.clearBtn {
+    font-size: 22pt;
+    background: #e57727;
+    border: 0;
+    margin-left: 25%;
+}
+
+.okBtn {
+    font-size: 22pt;
+    background: #36a5d9;
+    border: 0;
+    margin-left: 15%;
+}
