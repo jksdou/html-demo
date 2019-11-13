@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Canvas Example</title>
+</head>
+
+<body onload="loader()">
+    <h1>Canvas Example</h1>
+    <canvas id="canvas" width="600" height="500"></canvas>
+    <script type="text/javascript">
+        function loader() {
+            var canvas = document.getElementById('canvas');
+            var canvas1 = canvas.getContext('2d');
+
+            // Rectangles
+            canvas1.fillStyle = "rgba(0, 200, 200, 1)";
+            canvas1.fillRect(30, 30, 75, 70);
+            canvas1.fillStyle = "rgba(200, 200, 0, 1)";
+            canvas1.fillRect(70, 50, 55, 70);
+            canvas1.fillStyle = "rgba(200, 0, 0, 1)";
+            canvas1.fillRect(90, 50, 75, 50);
+
+            // Stroked triangles
+            canvas1.beginPath();
+            canvas1.strokeStyle = "rgba(200, 0, 0, 0.5)";
+            canvas1.moveTo(110, 205);
+            canvas1.lineTo(110, 125);
+            canvas1.lineTo(30, 205);
+            canvas1.closePath();
+            canvas1.stroke();
+            canvas1.beginPath();
+            canvas1.moveTo(100, 305);
+            canvas1.lineTo(100, 125);
+            canvas1.lineTo(20, 205);
+            canvas1.closePath();
+            canvas1.stroke();
+            canvas1.beginPath();
+            canvas1.moveTo(90, 205);
+            canvas1.lineTo(90, 125);
+            canvas1.lineTo(10, 205);
+            canvas1.closePath();
+            canvas1.stroke();
+
+            // Filled triangle
+            canvas1.fillStyle = "rgba(0, 200, 0, 0.5)";
+            canvas1.beginPath();
+            canvas1.moveTo(225, 25);
+            canvas1.lineTo(305, 25);
+            canvas1.lineTo(225, 105);
+            canvas1.closePath();
+            canvas1.fill();
+
+            // Heart
+            canvas1.fillStyle = "rgba(200, 0, 0, 0.5)";
+            canvas1.beginPath();
+            canvas1.moveTo(75, 250);
+            canvas1.bezierCurveTo(75, 247, 70, 235, 50, 235);
+            canvas1.bezierCurveTo(20, 235, 20, 272.5, 20, 272);
+            canvas1.bezierCurveTo(20, 290, 40, 312, 75, 330);
+            canvas1.bezierCurveTo(110, 312, 130, 290, 130, 272);
+            canvas1.bezierCurveTo(130, 272.5, 130, 235, 100, 235);
+            canvas1.bezierCurveTo(85, 235, 75, 247, 75, 250);
+            canvas1.closePath();
+            canvas1.fill();
+
+            // Quadratic curves
+            canvas1.strokeStyle = "rgba(0, 0, 0, 1)";
+            canvas1.beginPath();
+            canvas1.moveTo(275, 125);
+            canvas1.quadraticCurveTo(225, 125, 225, 162);
+            canvas1.quadraticCurveTo(260, 200, 265, 200);
+            canvas1.quadraticCurveTo(325, 200, 325, 162);
+            canvas1.quadraticCurveTo(325, 125, 275, 125);
+            canvas1.closePath();
+            canvas1.stroke();
+
+            // Arcs
+            canvas1.beginPath();
+            canvas1.arc(275, 275, 50, 0, Math.PI * 2, true);
+            canvas1.moveTo(310, 275);
+            canvas1.arc(275, 275, 35, 0, 0.75 * Math.PI, false);
+            canvas1.moveTo(300, 255);
+            canvas1.arc(265, 255, 35, 0, 0.5 * Math.PI, false);
+            canvas1.moveTo(280, 255);
+            canvas1.arc(245, 255, 35, 0, 0.2 * Math.PI, false);
+            canvas1.closePath();
+            canvas1.stroke();
+
+            canvas1.font = 'italic 40px sans-serif';
+            canvas1.strokeText("Hello World!", 50, 400);
+        }
+    </script>
+</body>
+
+</html>

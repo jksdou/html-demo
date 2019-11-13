@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Canvas 简单画图板</title>
+    <style type="text/css">
+        body,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            display: block;
+            font-size: 14px;
+            margin: 0px 2px 0px 2px;
+            padding: 0px 15px 0px 15px;
+            line-height: 150%;
+            color: #1A2536;
+            font-family: Georgia, Times, "Times New Roman", "Heiti SC", "Microsoft Yahei", "微软雅黑", "宋体", serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <canvas id="the_stage" width="520" height="350" style="border: 1px solid #ddd;"></canvas>
+    </div>
+    <div>Copy from http://www.cnblogs.com/lgmcolin/archive/2013/02/16/2913268.html</div>
+    <script type="text/javascript">
+        function Draw(arg) {
+            if (arg.nodeType) { // 判断结点类型
+                this.canvas = arg;
+            } else if (typeof arg == 'string') {
+                this.canvas = document.getElementById(arg);
+            } else {
+                return;
+            }
+            this.init();
+        }
+
+        Draw.prototype = {
+            init: function () {
+                var that = this;
+                if (!this.canvas.getContext) {
+                    // 判断是否支持Canvas
+                    return;
+                }
+                this.context = this.canvas.getContext('2d');
+                this.canvas.onselectstart = function () {
+                    // 去掉选择
+                    return false;
+                };
+                this.canvas.onmousedown = function () {
+                    that.drawBegin(event);
+                };
+            },
+            drawBegin: function (e) {
+                var that = this
+                // getBoundingClientRect()可以不用考虑兼容性
+                var stage_info = this.canvas.getBoundingClientRect();
+                // 清除文本的选中
+                window.getSelection() ? window.getSelection().removeAllRanges() : document.selection.empty();
+
+                this.context.moveTo(
+                    e.clientX - stage_info.left,
+                    e.clientY - stage_info.top
+                );
+                document.onmousemove = function () {
+                    that.drawing(event);
+                };
+                document.onmouseup = this.drawEnd;
+            },
+            drawing: function (e) {
+                var stage_info = this.canvas.getBoundingClientRect();
+
+                this.context.lineTo(
+                    e.clientX - stage_info.left,
+                    e.clientY - stage_info.top
+                );
+                this.context.stroke(); // 相当与fill()，填充
+            },
+
+            drawEnd: function () {
+                document.onmousemove = document.onmouseup = null; // 释放内存
+            }
+        };
+
+        var draw = new Draw('the_stage');
+    </script>
+</body>
+
+</html>
