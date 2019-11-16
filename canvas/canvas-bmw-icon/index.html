@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Canvas 宝马bmw图标</title>
+</head>
+
+<body style="background:#aaa;">
+
+    <div style="width:620px;margin:20px auto 0 auto;">
+        <canvas id="wheelcanvas" width="500" height="500" style="background:#aaa;"></canvas>
+    </div>
+
+    <script type="text/javascript">
+        var colors = ["#069ffd", "#fff"];
+        var startAngle = 0;
+        var arc = Math.PI / 2;
+        var ctx;
+
+        function drawBMW() {
+            var canvas = document.getElementById("wheelcanvas");
+            if (canvas.getContext) {
+
+                ctx = canvas.getContext("2d");
+                ctx.clearRect(0, 0, 500, 500);
+                // 画最外面 的黑边白边
+                var outsideRadius = 210;
+                ctx.fillStyle = "white";
+                ctx.lineWidth = 8;
+                ctx.beginPath();
+                ctx.arc(250, 250, outsideRadius, 0, Math.PI * 2, false);
+                ctx.stroke();
+                ctx.fill();
+                ctx.save();
+                ctx.restore();
+                // 画里面的黑环白边
+                ctx.fillStyle = "white";
+                ctx.lineWidth = 170;
+                ctx.beginPath();
+                ctx.arc(250, 250, 120, 0, Math.PI * 2, false);
+                ctx.stroke();
+                ctx.fill();
+                ctx.save();
+                ctx.restore();
+
+                var insideRadius = 114;
+                // 画圆心上蓝白相间的扇形
+                for (var i = 0; i < 4; i++) {
+                    var angle = startAngle + i * arc;
+                    ctx.fillStyle = colors[i % 2];
+                    ctx.beginPath();
+                    ctx.lineWidth = 0;
+                    ctx.arc(250, 250, insideRadius, angle, angle + arc, false);
+                    ctx.arc(250, 250, 0, angle + arc, angle, true);
+                    ctx.fill();
+                    ctx.save();
+                    ctx.restore();
+                }
+
+                ctx.fillStyle = 'white';
+                ctx.font = "normal 70px 'Arial'";
+                ctx.textAlign = "center";
+                ctx.translate(250, 250);
+
+                ctx.beginPath();
+                ctx.save();
+                ctx.rotate(-45 * Math.PI / 180);
+                ctx.fillText("B", -20, -140);
+                ctx.restore();
+
+                ctx.beginPath();
+                ctx.fillText("M", 0, -130);
+
+                ctx.beginPath();
+                ctx.rotate(45 * Math.PI / 180);
+                ctx.fillText("W", 20, -140);
+                ctx.restore();
+            }
+        }
+        drawBMW();
+    </script>
+</body>
+
+</html>
