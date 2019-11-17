@@ -6,22 +6,20 @@
     <title>Canvas 宝马bmw图标</title>
 </head>
 
-<body style="background:#aaa;">
+<body>
 
     <div style="width:620px;margin:20px auto 0 auto;">
-        <canvas id="wheelcanvas" width="500" height="500" style="background:#aaa;"></canvas>
+        <canvas id="canvas" width="500" height="500"></canvas>
     </div>
 
     <script type="text/javascript">
-        var colors = ["#069ffd", "#fff"];
-        var startAngle = 0;
-        var arc = Math.PI / 2;
-        var ctx;
-
-        function drawBMW() {
-            var canvas = document.getElementById("wheelcanvas");
+        (function () {
+            var colors = ["#069ffd", "#fff"];
+            var startAngle = 0;
+            var arc = Math.PI / 2;
+            var ctx;
+            var canvas = document.getElementById("canvas");
             if (canvas.getContext) {
-
                 ctx = canvas.getContext("2d");
                 ctx.clearRect(0, 0, 500, 500);
                 // 画最外面 的黑边白边
@@ -77,8 +75,7 @@
                 ctx.fillText("W", 20, -140);
                 ctx.restore();
             }
-        }
-        drawBMW();
+        })();
     </script>
 </body>
 
