@@ -1,0 +1,15 @@
+#chartdiv {
+	width	: 100%;
+	height	: 500px;
+}						
+.amcharts-map-area {
+  -webkit-transition: -webkit-transform .5s cubic-bezier(0,.45,.15,2);
+  -webkit-transform-origin: 50% 50%;
+
+  transition: transform .5s cubic-bezier(0,.45,.15,2);
+  transform-origin: 50% 50%;
+}
+.amcharts-map-area:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);  
+}
