@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JS 监听 localStorage 变化</title>
+    <link href="../../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>JS 监听 localStorage 变化</h1>
+        </div>
+        <p>当同源页面的某个页面修改了localStorage，其它的同源页面只要注册了storage事件，就会触发“onstorage”</p>
+        <p>但是：在同一个网页修改本地存储，又在同一个网页监听，这样是没有效果的。</p>
+        <p>所以，检测localStorage 变化需要如下条件：
+            <ul>
+                <li>同一浏览器打开了两个同源页面</li>
+                <li>其中一个网页修改了localStorage</li>
+                <li>另一网页注册了storage事件</li>
+            </ul>
+        </p>
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <p>同源网页1</p>
+                <iframe src="localStorage1.html" width="100%"></iframe>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <p>同源网页2</p>
+                <iframe src="localStorage1.html" width="100%"></iframe>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <p>同源网页3</p>
+                <iframe src="localStorage1.html" width="100%"></iframe>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
