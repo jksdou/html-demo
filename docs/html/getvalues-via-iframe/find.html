@@ -1,0 +1,31 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>查询页面</title>
+</head>
+
+<body>
+    <div>
+        <form name="form1" method="get">
+            <p>
+                <span>数据：</span>
+                <input type="text" name="data" class="text" id="text1">
+            </p>
+            <p>
+                <input type="submit" value="提交" onclick="javascript:show();">
+            </p>
+        </form>
+        <script type="text/javascript">
+            function show() {
+                var data = document.form1.data.value;
+                //top.result.document.location="result.html?data=123451234";
+                top.result.document.location = 'result.html?data=' + data;
+                //window.top.frames['result'].document.getElementById("an").innerHTML=data;
+            }
+        </script>
+    </div>
+</body>
+
+</html>
