@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>JS 随机数生成算法</title>
+    <link href="../../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>JS 随机数生成算法</h1>
+        </div>
+        <div class="input-group" style="max-width: 400px;">
+            <div class="input-group-addon">最大数：</div>
+            <input class="form-control" type="text" value="5" id="n" />
+            <div class="input-group-btn">
+                <button class="btn btn-default" onclick="generate()">生成</button>
+            </div>
+        </div>
+        <p>随机数：<span id="result"></span></p>
+    </div>
+    <script src="rand.js"></script>
+    <script>
+        function generate() {
+            this.n = document.getElementById('n').value
+            if (this.n == '' || this.n == undefined) {
+                this.n = 5
+                document.getElementById('n').value = 5
+            }
+            this.text = rand(Number(this.n))
+            document.getElementById('result').innerHTML = this.text
+        }
+    </script>
+</body>
+
+</html>

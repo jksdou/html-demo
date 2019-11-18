@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>JS 定时器setInterval</title>
+    <link href="../../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        #record {
+            word-break: break-word;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>JS 定时器setInterval</h1>
+        </div>
+        <p>定时器继续执行，根据条件判断是否执行</p>
+        <button class="btn btn-default" id="btn-toggle">开启状态</button>
+        <hr /> 状态：
+        <span id='show'>0</span>
+        <br />
+        <hr>
+        <p>定时器取消执行</p>
+        <button class="btn btn-default" id="btn-start">开始</button>
+        <button class="btn btn-default" id="btn-reset">重置</button>
+        <button class="btn btn-default" id="btn-mark">标记</button>
+        <button class="btn btn-default" id="btn-cancel">暂停</button>
+        <hr />
+        <div id="record"></div>
+    </div>
+</body>
+<script type="text/javascript">
+    var isShow = false;
+    var clock = setInterval(clockRun, 1);
+    var num = document.getElementById('show');
+    var record = document.getElementById('record');
+    var btn = document.getElementById('btn-toggle');
+    var btnStart = document.getElementById('btn-start');
+    var btnReset = document.getElementById('btn-reset');
+    var btnMark = document.getElementById('btn-mark');
+    var btnCancel = document.getElementById('btn-cancel');
+
+    function clockRun() {
+        if (!isShow) {
+            console.log(isShow);
+            return;
+        }
+        num.innerHTML = (Number(num.innerHTML) + 1).toString();
+    }
+
+    function clockCancel() { // 取消定时器
+        clearInterval(clock);
+        clock = null;
+        isShow = false;
+        updateValue(isShow, btn);
+    }
+
+    function clockStart() { // 定时器开始
+        clock = setInterval(clockRun, 1);
+        isShow = true;
+        updateValue(isShow, btn);
+    }
+
+    function clockReset() { // 定时器开始
+        clockCancel();
+        num.innerHTML = 0;
+        record.innerHTML = '';
+    }
+
+    function clockMark() { // 计数
+        if (Number(num.innerHTML) == 0) {
+            return;
+        }
+        Number(record.innerHTML) == 0 ? record.innerHTML += '<span>' + num.innerHTML + '</span>' : record
+            .innerHTML +=
+            ',<span>' + num.innerHTML + '</span>';
+    }
+
+    function updateValue(x, t) {
+        if (x) {
+            t.innerHTML = '点击暂停'
+        } else {
+            t.innerHTML = '点击开启'
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        updateValue(isShow, btn);
+    }, false);
+    btn.addEventListener('click', function () {
+        isShow = !isShow;
+        updateValue(isShow, btn);
+    });
+    btnStart.addEventListener('click', function () {
+        clockCancel();
+        clockStart();
+    });
+    btnReset.addEventListener('click', function () {
+        clockReset();
+    });
+    btnCancel.addEventListener('click', function () {
+        clockCancel();
+    });
+    btnMark.addEventListener('click', function () {
+        clockMark();
+    });
+</script>
+
+</html>

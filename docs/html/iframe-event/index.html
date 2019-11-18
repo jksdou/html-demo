@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>iframe 滚动事件</title>
+    <script type="text/javascript" src="../../assets/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <p>屏幕宽度为<span>0</span> px</p>
+    <p>请试着重新调整浏览器窗口的大小。</p>
+    <iframe id="inIframe" width="320" height="330" frameborder="2" src="in.html" onload="ifmLoaded()">1111</iframe>
+    <p>Console输出：</p>
+    <hr />
+    <pre id="output"></pre>
+
+    <script type="text/javascript">
+        console.output = function (x) {
+            x && $("#output").append(x + "<br />");
+        }
+
+        function ifmLoaded() {
+            console.output("Iframe加载成功");
+        }
+        $(document).ready(function () {
+            var resize = function () {
+                var WindowWidth = $(window).width();
+                $("span").text(WindowWidth);
+            }
+            resize();
+            $(window).resize(function () {
+                resize();
+            });
+
+            // 滚动监听事件
+            var inIframe = document.getElementById("inIframe").contentWindow;
+            console.log(inIframe);
+            var doc = inIframe.document;
+            console.log(doc);
+            inIframe.scroll(0, doc.body.scrollHeight);
+            inIframe.addEventListener("scroll", function (e) {
+                console.output("监听1-滚动");
+                return e.preventDefault();
+            }, false)
+
+            inIframe.onscroll = function () {
+                console.output("监听2-滚动");
+            }
+
+            function do_once() {
+                console.output("执行一次则移除本事件");
+                inIframe.removeEventListener("scroll", do_once, false);
+            }
+            inIframe.addEventListener("scroll", do_once, false);
+        });
+    </script>
+</body>
+</html>

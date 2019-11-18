@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Javascript实现iframe注入</title>
+    <link href="../../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>JS 实现iframe注入</h1>
+        </div>
+        <iframe name="content" id="aaa" src="../../assets/img/demo.jpg" onload="bbb();" ></iframe>
+        <div id="result"></div>
+    </div>
+
+    <script type="text/javascript">
+        var test = document.getElementById("aaa").contentDocument;
+        function bbb () {
+            test.write("<div>123123</div>");
+            // test.contentDocument.close();
+        }
+    </script>
+</body>
+
+</html>

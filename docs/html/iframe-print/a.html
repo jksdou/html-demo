@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script language="javascript">
+        function printdiv(printpage) {
+            var headstr = "<html><head><title></title></head><body>";
+            var footstr = "</body>";
+            var newstr = document.all.item(printpage).innerHTML;
+            var oldstr = document.body.innerHTML;
+            document.body.innerHTML = headstr + newstr + footstr;
+            window.print();
+            document.body.innerHTML = oldstr;
+            return false;
+        }
+
+        function printpage() {
+            myFrame.window.print();
+        }
+    </script>
+    <title>待整理</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>待整理</h1>
+        </div>
+    </div>
+    <input type="button" onClick="printpage('div_print');" value=" 打印 ">
+    <div id="div_print">
+        <h1 style="Color:Red">被打印区域</h1>
+    </div>
+    这块区域是打印不到的！
+    <iframe name="myFrame" src="b.html"></iframe>
+</body>
+
+</html>
