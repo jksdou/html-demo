@@ -1,3 +1,4 @@
+source: html
 index_generator:
     path: 'index.html'
  
