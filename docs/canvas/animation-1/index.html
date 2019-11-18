@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Canvas 简单星星动画</title>
+</head>
+
+<body>
+    <!-- 大多数 Canvas 绘图 API 都没有定义在 <canvas> 元素本身上，而是定义在通过画布的 getContext()获得的一个“绘图环境”对象上。 -->
+    <canvas id='canvas' width="800px" height="500px"></canvas>
+    <script type="text/javascript">
+        var canvas = document.getElementById('canvas');
+        var c = canvas.getContext('2d');
+        c.fillStyle = 'gray';
+        c.fillRect(0, 0, 800, 500)
+        var target = [{}];
+        for (var i = 0; i <= 60; i++) {
+            var obj = {}
+            obj.x = randomNum(30, 770);
+            obj.y = randomNum(30, 470);
+            obj.speedX = randomNum(-2, 2);
+            obj.speedY = randomNum(-2, 2);
+            obj.deg = randomNum(0, 180)
+            target[i] = obj;
+            drawStar(c, target[i].x, target[i].y, 10, 5, target[i].deg);
+        };
+
+        setInterval(function () {
+            // 更新画布
+            c.clearRect(0, 0, 800, 500);
+            c.fillStyle = 'gray';
+            c.fillRect(0, 0, 800, 500)
+            // 绘制星星
+            for (var i = 0; i <= 60; i++) {
+
+                target[i].x = target[i].x + target[i].speedX;
+                target[i].y = target[i].y + target[i].speedY;
+
+                // 保证星星速度不为零
+                if (target[i].speedX == 0) {
+                    target[i].speedX = 1
+                }
+                if (target[i].speedY == 0) {
+                    target[i].speedY = 1
+                }
+                // 星星运动到边界后往回运动
+                if (target[i].x >= 770) {
+                    target[i].speedX = -randomNum(1, 2);
+                }
+                if (target[i].x <= 30) {
+                    target[i].speedX = randomNum(1, 2);
+                }
+                if (target[i].y >= 470) {
+                    target[i].speedY = -randomNum(1, 2);
+                }
+                if (target[i].y <= 30) {
+                    target[i].speedY = randomNum(1, 2);
+                }
+                drawStar(c, target[i].x, target[i].y, 20, 10, target[i].deg);
+            }
+
+        }, 1.7);
+        // 取随机数
+        function randomNum(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+        // 画星星
+        // x, y为圆心坐标，R、r分别为大圆、小圆半径,rot旋转角度 
+        function drawStar(cxt, x, y, r, R, rot) {
+            cxt.beginPath();
+            for (var i = 0; i < 5; i++) {
+                cxt.lineTo(Math.cos((18 + i * 72 - rot) / 180 * Math.PI) * R + x,
+                    -Math.sin((18 + i * 72 - rot) / 180 * Math.PI) * R + y)
+                cxt.lineTo(Math.cos((54 + i * 72 - rot) / 180 * Math.PI) * r + x,
+                    -Math.sin((54 + i * 72 - rot) / 180 * Math.PI) * r + y)
+            }
+            cxt.closePath();
+            cxt.lineWidth = 3;
+            cxt.fillStyle = "#fb3";
+            cxt.strokeStyle = "#fb5";
+            cxt.lineJoin = "round";
+            cxt.fill();
+            cxt.stroke();
+        }
+    </script>
+</body>
+
+</html>

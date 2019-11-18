@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Canvas 简单动画</title>
+</head>
+
+
+<body>
+    <canvas id="canvas" width="800px" height="600px"></canvas>
+    <!-- 有个要注意的点，就是canvas标签本身自带width与height属性，
+        设置此属性可以直接更改canvas坐标系的宽与高，
+        而在css里设置宽高，只是把canvas坐标系拉伸了，坐标值不变，显示出来的图像也都被拉伸了。 -->
+    <script type="text/javascript">
+        var canvas = document.getElementById("canvas");
+        var parti = [];
+
+        function loop() {
+            CreateParticles();
+            UpdateParticles();
+            KillParticles();
+            DrawParticles();
+        }
+
+        function CreateParticles() {
+            var partis = {
+                x: Math.random() * canvas.clientWidth,
+                y: 0,
+                color: "#2e7777",
+                radius: 2 + Math.random() * 5,
+                speed: 2 + Math.random() * 5
+            };
+            if (parti.length < 80) {
+                parti.push(partis);
+            }
+        }
+
+        function UpdateParticles() {
+            for (var i in parti) {
+                parti[i].y += parti[i].speed;
+            }
+        }
+
+        function KillParticles() {
+            for (var i in parti) {
+                if (parti[i].y >= canvas.clientHeight) {
+                    parti[i].y = 0;
+                }
+            }
+        }
+
+        function DrawParticles() {
+            var contex = canvas.getContext("2d");
+            contex.fillStyle = "#fff";
+            contex.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+            for (var i in parti) {
+                contex.beginPath();
+                contex.arc(parti[i].x, parti[i].y, parti[i].radius, 0, Math.PI * 2);
+                contex.closePath();
+                contex.fillStyle = parti[i].color;
+                contex.fill();
+            }
+        }
+
+        setInterval(loop, 30);
+    </script>
+</body>
+
+</html>
