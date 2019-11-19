@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>JS 获取鼠标坐标</title>
+    <link href="../../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .ctn {
+            width: 500px;
+            height: 500px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>JS 获取鼠标坐标</h1>
+        </div>
+        <p>把鼠标悬停在下面的矩形上可以看到坐标：<span id="demo"></span></p>
+        <div class="ctn" onmousemove="getCoordinates(event)" onmouseout="clearCoordinates()"></div>
+    </div>
+    <script type="text/javascript">
+        function getCoordinates(e) {
+            x = e.clientX;
+            y = e.clientY;
+            document.getElementById("demo").innerHTML = "[ X : " + x + ", Y : " + y + " ]";
+        }
+
+        function clearCoordinates() {
+            document.getElementById("demo").innerHTML = "";
+        }
+    </script>
+</body>
+
+</html>
