@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>JS 修改下拉列表 SELECT 的值</title>
+    <link href="../../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>JS 修改下拉列表 SELECT 的值</h1>
+        </div>
+        <p>默认选中CCC</p>
+        <select class="form-control" id="demo" style="width: 200px;">
+            <option value="all">选项全部</option>
+            <option value="aaa">选项AAA</option>
+            <option value="bbb">选项BBB</option>
+            <option value="ccc">选项CCC</option>
+            <option value="ddd">选项DDD</option>
+            <option value="eee">选项EEE</option>
+            <option value="fff">选项FFF</option>
+        </select>
+        <hr />
+        <button class="btn btn-default" onclick="selectValue('demo', 'eee')">选中EEE</button>
+        <button class="btn btn-default" onclick="selectValue('demo', 'aaa')">选中AAA</button>
+    </div>
+
+    <script>
+        function selectValue(sId, value) {
+            var ops = document.getElementById(sId).options;
+            for (var i = 0; i < ops.length; i++) {
+                var tempValue = ops[i].value;
+                if (tempValue == value) {
+                    ops[i].selected = true;
+                }
+            }
+        }
+        selectValue("demo", "ccc");
+    </script>
+</body>
+
+</html>

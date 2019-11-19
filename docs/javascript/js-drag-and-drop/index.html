@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>原生JavaScript拖拽效果代码</title>
+    <meta charset="utf-8">
+    <title>原生 JS 元素位置拖拽演示</title>
     <style>
         * {
             margin: 0;
@@ -24,15 +24,15 @@
 </head>
 
 <body>
-    <div id="demo"></div>
+    <div id="demo">鼠标拖拽本元素</div>
     <script>
         var oBox = document.getElementById('demo');
         oBox.onmousedown = function (e) {
-            var oEvent = e || window.event,
-                disL = oEvent.clientX - oBox.offsetLeft,
-                disT = oEvent.clientY - oBox.offsetTop,
-                maxL = document.documentElement.clientWidth - oBox.offsetWidth,
-                maxT = document.documentElement.clientHeight - oBox.offsetHeight;
+            var oEvent = e || window.event;
+            var disL = oEvent.clientX - oBox.offsetLeft;
+            var disT = oEvent.clientY - oBox.offsetTop;
+            var maxL = document.documentElement.clientWidth - oBox.offsetWidth;
+            var maxT = document.documentElement.clientHeight - oBox.offsetHeight;
             document.onmousemove = function (e) {
                 var oEvent = e || window.event,
                     disX = oEvent.clientX - disL,
