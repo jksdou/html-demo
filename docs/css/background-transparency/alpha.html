@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>背景透明，文字不透明 - alpha</title>
+    <style>
+        body {
+            padding: 50px;
+            background: url(img/bg.png) 0 0 repeat;
+        }
+
+        .demo {
+            padding: 25px;
+            background: #000000;
+            filter: Alpha(opacity=50);
+            /* 只支持IE6、7、8、9 */
+            position: static;
+            /* IE6、7、8只能设置position:static(默认属性) ，否则会导致子元素继承Alpha值 */
+            *zoom: 1;
+            /* 激活IE6、7的haslayout属性，让它读懂Alpha */
+        }
+
+        .demo p {
+            color: #FFFFFF;
+            position: relative;
+            /* 设置子元素为相对定位，可让子元素不继承Alpha值，保证字体颜色不透明 */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="demo">
+        <p>背景透明，文字不透明</p>
+    </div>
+    <p><a href="./rgba.html">利用 rgba 实现</a></p>
+    <p><a href="./opacity.html">利用 opacity 实现</a></p>
+    <p><a href="./alpha.html">利用 alpha 实现</a></p>
+    <p><a href="./compatible.html">全兼容</a></p>
+
+</html>

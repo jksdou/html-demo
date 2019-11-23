@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>背景透明，文字不透明 - opacity</title>
+    <style>
+
+        body {
+            padding: 50px;
+            background: url(img/bg.png) 0 0 repeat;
+        }
+
+        .demo {
+            padding: 25px;
+            background-color: #000000;
+            opacity: 0.2;
+        }
+
+        .demo p {
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="demo">
+        <p>背景透明，文字也透明</p>
+    </div>
+    <p><a href="./rgba.html">利用 rgba 实现</a></p>
+    <p><a href="./opacity.html">利用 opacity 实现</a></p>
+    <p><a href="./alpha.html">利用 alpha 实现</a></p>
+    <p><a href="./compatible.html">全兼容</a></p>
+
+</html>
