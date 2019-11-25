@@ -7,71 +7,56 @@
     <link rel="stylesheet" type="text/css" href="css/xcConfirm.css" />
     <script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
-    <style type="text/css">
-        .sgBtn {
-            width: 135px;
-            height: 35px;
-            line-height: 35px;
-            margin-left: 10px;
-            margin-top: 10px;
-            text-align: center;
-            background-color: #0095D9;
-            color: #FFFFFF;
-            float: left;
-            border-radius: 5px;
-        }
-    </style>
     <script type="text/javascript">
-        $(function() {
-
-            $("#btn1").click(function() {
+        $(function () {
+            $("#btn1").click(function () {
                 var txt = "提示文字，提示文字，提示文字，提示文字，提示文字，提示文字";
                 window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.info);
             });
 
-            $("#btn2").click(function() {
+            $("#btn2").click(function () {
                 var txt = "提示文字，提示文字，提示文字，提示文字，提示文字，提示文字";
                 window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.confirm);
 
             });
 
-            $("#btn3").click(function() {
+            $("#btn3").click(function () {
                 var txt = "提示文字，提示文字，提示文字，提示文字，提示文字，提示文字";
                 window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
             });
 
-            $("#btn4").click(function() {
+            $("#btn4").click(function () {
                 var txt = "提示文字，提示文字，提示文字，提示文字，提示文字，提示文字";
                 window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
             });
 
-            $("#btn5").click(function() {
+            $("#btn5").click(function () {
                 var txt = "提示文字，提示文字，提示文字，提示文字，提示文字，提示文字";
                 window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
             });
 
-            $("#btn6").click(function() {
+            $("#btn6").click(function () {
                 var txt = "请输入";
                 window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.input, {
-                    onOk: function(v) {
+                    onOk: function (v) {
                         console.log(v);
                     }
                 });
             });
 
-            $("#btn7").click(function() {
+            $("#btn7").click(function () {
                 var txt = "自定义呀";
                 var option = {
                     title: "自定义",
                     btn: parseInt("0011", 2),
-                    onOk: function() {
+                    onOk: function () {
                         console.log("确认啦");
                     }
                 }
                 window.wxc.xcConfirm(txt, "custom", option);
             });
 
-            $("#btn8").click(function() {
+            $("#btn8").click(function () {
                 var txt = "默认";
                 window.wxc.xcConfirm(txt);
             });
@@ -80,17 +65,15 @@
 </head>
 
 <body>
-    <div class="" style="height: 168px;">
-        <button class="sgBtn" id="btn1">弹窗1(信息)</button>
-        <button class="sgBtn" id="btn2">弹窗2(提示)</button>
-        <button class="sgBtn" id="btn3">弹窗3(警告)</button>
-        <button class="sgBtn" id="btn4">弹窗4(错误)</button>
-        <button class="sgBtn" id="btn5">弹窗5(成功)</button>
-        <button class="sgBtn" id="btn6">弹窗6(输入框)</button>
-        <button class="sgBtn" id="btn7">弹窗7(自定义)</button>
-        <button class="sgBtn" id="btn8">弹窗8(默认)</button>
-    </div>
-    <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+    <div>
+        <button id="btn1">弹窗1(信息)</button>
+        <button id="btn2">弹窗2(提示)</button>
+        <button id="btn3">弹窗3(警告)</button>
+        <button id="btn4">弹窗4(错误)</button>
+        <button id="btn5">弹窗5(成功)</button>
+        <button id="btn6">弹窗6(输入框)</button>
+        <button id="btn7">弹窗7(自定义)</button>
+        <button id="btn8">弹窗8(默认)</button>
     </div>
 </body>
 
