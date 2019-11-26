@@ -1,0 +1,37 @@
+.jawbone-hero .background-image {
+    position: absolute;
+    background: transparent none no-repeat scroll 50% 0;
+    background-size: cover;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: 0 auto;
+    z-index: -1
+}
+
+.jawbone-hero {
+    height: 100%;
+    min-height: 550px
+}
+
+.jawbone-hero .background-image {
+    position: fixed
+}
+
+.jawbone-takeover-minimulti .background-image {
+    background-image: url(../images/img-600.jpg)
+}
+
+@media (min-width: 600px) {
+    .jawbone-takeover-minimulti .background-image {
+        background-image: url(../images/img-1280.jpg)
+    }
+}
+
+@media (min-width: 1016px) {
+    .jawbone-takeover-minimulti .background-image {
+        background-image: url(../images/img-2000.jpg)
+    }
+}
