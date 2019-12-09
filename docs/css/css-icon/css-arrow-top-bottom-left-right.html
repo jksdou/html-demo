@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 上下左右箭头图标</title>
+    <style>
+        .demo-container {
+            width: 260px;
+            height: 200px;
+            border: 1px solid #999;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+        }
+        .icon-arrows {
+            padding: 10px;
+            width: 20px;
+            height: 20px;
+            position: relative;
+            display: table;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .icon-arrows::after {
+            content: "";
+            width: 20px;
+            height: 20px;
+            display: table-cell;
+
+            border-color: #c3c8d6;
+            border-style: solid;
+            border-width: 0;
+        }
+        .icon-arrows:hover:after {
+            border-color: rgb(160, 113, 236);
+        }
+        .icon-arrows.icon-arrows-top::after {
+            border-top-width: 1px;
+            border-right-width: 1px;
+            transform: rotate(-45deg);
+            margin-right: 30px;
+            margin-top: 6px;
+        }
+
+        .icon-arrows.icon-arrows-bottom::after {
+            border-top-width: 1px;
+            border-right-width: 1px;
+            transform: rotate(135deg);
+            margin-right: 30px;
+            margin-top: -6px;
+        }
+
+        .icon-arrows.icon-arrows-left::after {
+            border-top-width: 1px;
+            border-right-width: 1px;
+            transform: rotate(-135deg);
+            margin-right: 10px;
+        }
+
+        .icon-arrows.icon-arrows-right::after {
+            border-top-width: 1px;
+            border-right-width: 1px;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="demo-container">
+        <div class="icon-arrows icon-arrows-top"></div>
+        <div class="icon-arrows icon-arrows-bottom"></div>
+        <div class="icon-arrows icon-arrows-left"></div>
+        <div class="icon-arrows icon-arrows-right"></div>
+    </div>
+</body>
+
+</html>
