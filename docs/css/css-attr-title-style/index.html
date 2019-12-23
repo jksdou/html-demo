@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CSS 自定义title样式</title>
+    <style>
+        a[title] {
+            position: relative;
+        }
+
+        a[title]:hover:before {
+            position: absolute;
+            top: 20px;
+            right: 0;
+            content: attr(title);
+            color: #000000;
+            border: 1px solid #242424;
+            background-color: #E5E5E5;
+        }
+    </style>
+</head>
+
+<body>
+    <a class="title-tips" href="javascript:void(0)" title="获取这里的文字">文字链接颜色</a>
+</body>
+
+</html>
