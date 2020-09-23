@@ -3,41 +3,84 @@
 <head>
     <title>dynamicTable-动态渲染表格</title>
     <!-- 引入样式 -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
+    <style>
+        .view-header {
+            height: 40px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .view-header .view-title {
+            color: red;
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .view-title+span {
+            margin-left: 30px;
+        }
+
+        .el-row {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn-export {
+            text-align: right;
+        }
+    </style>
 </head>
 
 <body>
     <!-- 主界面模板 -->
     <div id="dynamicTable">
-        <p style="color: red;">根据表名，动态渲染整个表格，使用组件</p>
-        <el-row style="margin-bottom: 20px">
-            <el-col>
-                <el-button type="primary" @click="handleSelectTable(0)">查询表1</el-button>
-                <el-button type="primary" @click="handleSelectTable(1)">查询表2</el-button>
-                <el-button type="primary" @click="handleSelectTable(2)">查询表3</el-button>
-                <el-button v-if="currentTable.showExport" type="primary">导出</el-button>
-            </el-col>
-        </el-row>
-        <table-component ref="tableRef" :table-columns="currentTable.list" :table-data="currentData"
-            :show-summary="currentTable.showSummary" :show-pagination="currentTable.showPagination"
-            :total="currentTable.total" :show-export="currentTable.showExport">
+        <div class="view-header">
+            <span class="view-title">报表功能</span>
+            <span v-if="currentSection.title">{{ currentSection.title }}</span>
+        </div>
+        <el-form :inline="true" :model="searchForm">
+            <el-form-item label="数据表筛选">
+                <el-select v-model="searchForm.section_index" placeholder="请选择数据表视图" @change="handleSelectTable">
+                    <el-option v-for="(item, index) in sectionList" :key="item.id" :label="item.title" :value="index">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <!-- 快速按钮 -->
+            <el-form-item v-for="(item, index) in quickBtnTypes" :key="item.index">
+                <el-button :type="searchForm.section_index == item ? 'primary' : ''" @click="handleSelectTable(item)">
+                    {{sectionList[item].title}}</el-button>
+            </el-form-item>
+            <br />
+            <!-- 角色切换 -->
+            <el-form-item v-if="currentSection.showRoleSwitch">
+                <el-radio-group v-model="searchForm.role">
+                    <el-radio-button :label="item.id" v-for="(item, index) in roleTypes" :key="item.index">{{item.name}}
+                    </el-radio-button>
+                </el-radio-group>
+            </el-form-item>
+            <el-button type="primary" @click="">查询</el-button>
+            <el-button v-if="currentSection.showExport" type="success" class="btn-export">导出</el-button>
+        </el-form>
+        <!-- 数据表格 -->
+        <table-component ref="tableRef" :table-fields="currentSection.fields" :table-data="currentData.list"
+            :show-summary="currentSection.showSummary" :show-pagination="currentSection.showPagination"
+            :total="currentData.total" :show-export="currentSection.showExport">
         </table-component>
     </div>
 
     <!-- 表格组件，模板 -->
     <div id="tableComponentApp" style="display: none;">
         <div>
-            <!-- <el-row style="margin-top: 20px">
-                <el-col>
-                    <el-button v-if="showExport" type="primary">导出</el-button>
-                </el-col>
-            </el-row> -->
             <el-table v-loading.lock="loading" :data="pageData" :show-summary="showSummary" :sum-text="sumText" border
                 style="width: 100%">
-                <el-table-column v-for="(item, index) in tableColumns" :prop="item.prop" :label="item.label"
+                <el-table-column v-for="(item, index) in tableFields" :prop="item.prop" :label="item.label"
                     :key="item.id" :sortable="item.sortable" show-overflow-tooltip :fixed="item.fixed || false"
                     :width="item.width || null">
                 </el-table-column>
+                <template slot="empty">
+                    <span>暂无数据</span>
+                </template>
             </el-table>
             <el-row style="margin-top: 20px" v-if="!loading && showPagination">
                 <el-col>
@@ -52,15 +95,44 @@
 
     <!-- 引入组件库 -->
     <!-- import Vue before Element -->
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
     <!-- import JavaScript -->
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+    <script src="https://unpkg.com/axios@0.20.0/dist/axios.min.js"></script>
     <!-- 表格组件功能 -->
     <script type="text/javascript">
+        function Request() {
+            // 实例
+            var axiosInstance = axios.create()
+            // 设置请求域名
+            axiosInstance.defaults.baseURL = '/'
+            // 设置默认请求头
+            axiosInstance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+            axiosInstance.defaults.withCredentials = true
+            axiosInstance.defaults.crossDomain = true
+            // 设置请求超时时间
+            axiosInstance.defaults.timeout = 60000
+            this.get = function (url, param) {
+                return axiosInstance({
+                    method: 'get',
+                    url,
+                    params: param
+                })
+            }
+            this.post = function (url, param) {
+                return axiosInstance({
+                    method: 'post',
+                    url,
+                    data: param
+                })
+            }
+        }
+
         function isArray(obj) {
             return Object.prototype.toString.call(obj) === '[object Array]';
         }
-        const tableComponent = {
+        // 表格组件功能
+        var tableComponent = {
             template: window.document.getElementById("tableComponentApp"), // .innerHTML,
             data: function () {
                 return {
@@ -70,7 +142,7 @@
                 }
             },
             props: {
-                tableColumns: { // 列
+                tableFields: { // 列
                     type: Array,
                     required: true
                 },
@@ -81,7 +153,7 @@
                 showSummary: { // 显示底部合计
                     type: [Boolean, String],
                     required: false,
-                    default: true
+                    default: false
                 },
                 sumText: { // 合计文案
                     type: String,
@@ -121,12 +193,6 @@
                     console.log(`当前页: ${val}`);
                 }
             },
-            // beforeUpdate() {
-            //     this.loading = true;
-            // },
-            // updated() {
-            //     this.loading = false;
-            // },
             watch: {
                 'tableData'(newValue, oldValue) {
                     this.$nextTick(() => {
@@ -137,31 +203,47 @@
                 }
             }
         };
-    </script>
-
-    <!-- 主界面功能 -->
-    <script type="text/javascript">
-        new Vue({
+        // 主界面
+        var App = new Vue({
             el: "#dynamicTable",
             components: {
                 'table-component': tableComponent
             },
             data: {
+                http: null, // HTTP请求
                 // 当前选中列表索引，默认第一个
-                currentTab: 0,
-                currentData: [], // 当前表格列字段数据
-                currentTable: { // 当前视图对象
+                defaultSection: 0,
+                quickBtnTypes: [0, 1, 2], // 快速按钮，按照sectionList中的index
+                roleTypes: [{
+                        id: 1,
+                        name: '视角1'
+                    },
+                    {
+                        id: 2,
+                        name: '视角2'
+                    },
+                    {
+                        id: 3,
+                        name: '视角3'
+                    }
+                ],
+                currentData: { // 当前视图对象
                     list: [], // 当前选中列表数据
-                    total: 0,
+                    total: 0
+                },
+                currentSection: { // 当前表格列字段数据
                     showSummary: false,
                 },
-                // 演示数据，表格的列表，实际从服务端取
-                demoColumn: [{
-                        showSummary: true,
-                        total: 10000,
-                        showExport: true,
-                        showPagination: true,
-                        list: [{
+                // 表格的列表，实际从服务端取
+                sectionList: [{
+                        section: 1, // 当前视图ID
+                        title: '数据统计表1', // 当前视图标题
+                        showSummary: true, // 当前视图显示合计项目
+                        showRoleSwitch: true, // 显示角色切换
+                        showExport: true, // 显示导出按钮
+                        showPagination: true, // 显示分页工具
+                        fields: [ // 当前视图表格数据
+                            {
                                 id: "date",
                                 prop: "date",
                                 label: "日期",
@@ -202,10 +284,12 @@
                         ]
                     },
                     {
+                        section: 2,
+                        title: '数据统计表2',
                         showSummary: false,
-                        total: 456,
+                        showRoleSwitch: true, // 显示角色切换
                         showPagination: true,
-                        list: [{
+                        fields: [{
                                 id: "bookName",
                                 prop: "bookName",
                                 label: "bookName: 书名"
@@ -219,9 +303,11 @@
                         ]
                     },
                     {
+                        section: 3,
+                        title: '数据统计表3',
                         showSummary: true,
-                        total: 3,
-                        list: [{
+                        showRoleSwitch: true, // 显示角色切换
+                        fields: [{
                                 id: "createTime",
                                 prop: "createTime",
                                 label: "createTime: 创建时间",
@@ -241,101 +327,141 @@
                     }
                 ],
                 // 演示数据表格列表数据，实际从服务端取
-                demoData: [
-                    [{
-                        date: '2016-05-03',
-                        name: '王小虎1',
-                        province: '上海',
-                        city: '普陀区',
-                        address: '上海市普陀区金沙江路 1518 弄',
-                        zip: 200333
-                    }, {
-                        date: '2016-05-02',
-                        name: '王小虎2',
-                        province: '上海',
-                        city: '普陀区',
-                        address: '上海市普陀区金沙江路 1518 弄',
-                        zip: 200333
-                    }, {
-                        date: '2016-05-04',
-                        name: '王小虎3',
-                        province: '上海',
-                        city: '普陀区',
-                        address: '上海市普陀区金沙江路 1518 弄',
-                        zip: 200333
-                    }, {
-                        date: '2016-05-01',
-                        name: '王小虎4',
-                        province: '上海',
-                        city: '普陀区',
-                        address: '上海市普陀区金沙江路 1518 弄',
-                        zip: 200333
-                    }, {
-                        date: '2016-05-08',
-                        name: '王小虎',
-                        province: '上海',
-                        city: '普陀区',
-                        address: '上海市普陀区金沙江路 1518 弄',
-                        zip: 200333
-                    }, {
-                        date: '2016-05-06',
-                        name: '王小虎',
-                        province: '上海',
-                        city: '普陀区',
-                        address: '上海市普陀区金沙江路 1518 弄',
-                        zip: 200333
-                    }, {
-                        date: '2016-05-07',
-                        name: '王小虎',
-                        province: '上海',
-                        city: '普陀区',
-                        address: '上海市普陀区金沙江路 1518 弄',
-                        zip: 200333
-                    }],
-                    [{
-                            bookName: "大话设计模式",
-                            price: "56"
-                        },
-                        {
-                            bookName: "算法导论",
-                            price: "156"
-                        },
-                        {
-                            bookName: "一本书",
-                            price: "35"
-                        }
-                    ],
-                    [{
-                        createTime: "2018-10-14",
-                        address: "sdf",
-                        email: "sdfsd@yule.com"
-                    }, {
-                        createTime: "2020-09-16",
-                        address: "sdf",
-                        email: "aaaaaaa@malasdfdf.com"
-                    }]
-                ]
+                dataList: [{
+                        total: 1000,
+                        list: [{
+                            date: '2016-05-03',
+                            name: '王小虎1',
+                            province: '上海',
+                            city: '普陀区',
+                            address: '上海市普陀区金沙江路 1518 弄',
+                            zip: 200333
+                        }, {
+                            date: '2016-05-02',
+                            name: '王小虎2',
+                            province: '上海',
+                            city: '普陀区',
+                            address: '上海市普陀区金沙江路 1518 弄',
+                            zip: 200333
+                        }, {
+                            date: '2016-05-04',
+                            name: '王小虎3',
+                            province: '上海',
+                            city: '普陀区',
+                            address: '上海市普陀区金沙江路 1518 弄',
+                            zip: 200333
+                        }, {
+                            date: '2016-05-01',
+                            name: '王小虎4',
+                            province: '上海',
+                            city: '普陀区',
+                            address: '上海市普陀区金沙江路 1518 弄',
+                            zip: 200333
+                        }, {
+                            date: '2016-05-08',
+                            name: '王小虎',
+                            province: '上海',
+                            city: '普陀区',
+                            address: '上海市普陀区金沙江路 1518 弄',
+                            zip: 200333
+                        }, {
+                            date: '2016-05-06',
+                            name: '王小虎',
+                            province: '上海',
+                            city: '普陀区',
+                            address: '上海市普陀区金沙江路 1518 弄',
+                            zip: 200333
+                        }, {
+                            date: '2016-05-07',
+                            name: '王小虎',
+                            province: '上海',
+                            city: '普陀区',
+                            address: '上海市普陀区金沙江路 1518 弄',
+                            zip: 200333
+                        }]
+                    },
+                    {
+                        total: 302,
+                        list: [{
+                                bookName: "大话设计模式",
+                                price: "56"
+                            },
+                            {
+                                bookName: "算法导论",
+                                price: "156"
+                            },
+                            {
+                                bookName: "一本书",
+                                price: "35"
+                            }
+                        ]
+                    },
+                    {
+                        total: 12,
+                        list: [{
+                            createTime: "2018-10-14",
+                            address: "sdf",
+                            email: "sdfsd@yule.com"
+                        }, {
+                            createTime: "2020-09-16",
+                            address: "sdf",
+                            email: "aaa@aa.com"
+                        }]
+                    }
+                ],
+                searchForm: {
+                    role: 1,
+                    section_index: 1
+                }
             },
             created() {
-                this.currentTable = this.demoColumn[this.currentTab]
+                this.http = new Request()
+                this.currentSection = this.sectionList[this.defaultSection]
             },
             mounted() {
-                this.$refs.tableRef.loading = true;
-                setTimeout(() => {
-                    this.$refs.tableRef.loading = false;
-                    this.currentData = this.demoData[this.currentTab]
-                }, 200);
+                this.getData(this.defaultSection)
             },
             methods: {
+                // sectionOnClickChange(index) {
+                //     console.log('sfSectionOnChange', index)
+                //     // this.searchForm.section = this.sectionList[index].section
+                // },
                 handleSelectTable(index) {
-                    this.$refs.tableRef.loading = true;
-                    // 变更表格列表及表头
-                    this.currentTable = this.demoColumn[index]
+                    this.searchForm.section_index = index
                     // 模拟接口请求
+                    this.getData(index)
+                },
+                getData(i) {
+                    // 变更表格列表及表头
+                    this.currentSection = this.sectionList[i]
+                    this.searchForm.section_index = i
+                    this.$refs.tableRef.loading = true;
+                    // 取数据
+                    this.requestData(this.currentSection.section)
+                    // 演示
                     setTimeout(() => {
                         this.$refs.tableRef.loading = false;
-                        this.currentData = this.demoData[index]
+                        this.currentData = this.dataList[i]
                     }, 200);
+                },
+                requestData(x) {
+                    console.log('请求数据', x)
+                    let data = {
+                        section: x
+                    }
+                    this.http.post('/api/data-list', data)
+                        .then(function (res) {
+                            console.log('res', res)
+                            if (res.data.code == 200) {
+                                console.log('200', res)
+                            } else {
+                                App.$message.success(res.data.msg)
+                            }
+                        })
+                        .catch(function (e) {
+                            App.$message.error('服务器开小差了，请稍后再试');
+                            console.error(e)
+                        });
                 }
             }
         });
