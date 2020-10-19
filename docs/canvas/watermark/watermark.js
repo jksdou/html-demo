@@ -54,7 +54,7 @@
         div.style.zIndex = settings.zIndex || '100000000'
         div.style.width = document.documentElement.clientWidth + 'px'
         div.style.height = document.documentElement.clientHeight + 'px'
-        div.style.background = 'url(' + imageBase64 + ')'
+        div.style.backgroundImage = 'url(' + imageBase64 + ')'
         div.style.backgroundRepeat = 'repeat'
         div.style.backgroundPositionX = 'left'
         div.style.backgroundPositionY = 'top'
