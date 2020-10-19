@@ -19,7 +19,7 @@
 
     var settings = {
         width: 150,
-        height: 50,
+        height: 120,
         color: 'rgba(0, 0, 0, 0.1)',
         zIndex: 99999999
     }
