@@ -1,0 +1,30 @@
+<div>
+    <div v-for="item in items" @click="dd(item)">
+        {{item.name}}，{{item.phone}}
+    </div>
+</div>
+
+<script>
+    export = {
+        props: {
+            items: []
+        },
+        methods: {
+            dd: function (msg) {
+                console.log(msg);
+            }
+        }
+    }
+</script>
+
+<style>
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity .9s
+    }
+
+    .fade-enter,
+    .fade-leave-active {
+        opacity: 0
+    }
+</style>

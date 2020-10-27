@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Vue 动态加载异步模板</title>
+    <!-- <link rel="stylesheet" href="css/lottery.css" /> -->
+    <script src="../../assets/lib/vuejs/vue.min.js"></script>
+    <script src="../../assets/lib/jquery/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+    <link rel="stylesheet" href="css/style.css" class="css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="header">
+            <h1 class="page_title">Vue 动态加载异步模板</h1>
+        </div>
+        <div class="container">
+            <sidebar></sidebar>
+            <div class="main">
+                <user-list :items="userList" v-if="isShowUserList"></user-list>
+                <button v-if="!isShowUserList" @click="switchUserList">查看用户列表</button>
+                <button v-else @click="switchUserList">隐藏用户列表</button>
+            </div>
+        </div>
+        <div class="footer-sticky"></div>
+        <div class="footer">
+            <span>&copy; 2020 doudoudzj</span>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isShowUserList: false,
+                userList: [{
+                        name: '张三',
+                        phone: '13333333333'
+                    },
+                    {
+                        name: '李四',
+                        phone: '13333333333'
+                    },
+                    {
+                        name: '李四',
+                        phone: '13333333333'
+                    },
+                    {
+                        name: '李四',
+                        phone: '13333333333'
+                    },
+                    {
+                        name: '李四',
+                        phone: '13333333333'
+                    },
+                    {
+                        name: '李四',
+                        phone: '13333333333'
+                    },
+                    {
+                        name: '李四',
+                        phone: '13333333333'
+                    },
+                    {
+                        name: '李四',
+                        phone: '13333333333'
+                    },
+                    {
+                        name: '李四',
+                        phone: '13333333333'
+                    },
+                    {
+                        name: '李四',
+                        phone: '13333333333'
+                    },
+                    {
+                        name: '李四',
+                        phone: '13333333333'
+                    },
+                    {
+                        name: '李四',
+                        phone: '13333333333'
+                    },
+                    {
+                        name: '李四',
+                        phone: '13333333333'
+                    }
+                ],
+                pageindex: 1,
+                selecteditem: null
+            },
+            components: {
+                'sidebar': vueComponent('common/sidebar.html'),
+                'user-list': vueComponent('user/list.html', {
+                    props: ['items']
+                }),
+                'user-info': vueComponent('user/info.html', {
+                    props: ['item']
+                })
+            },
+            methods: {
+                switchUserList: function (msg) {
+                    this.isShowUserList = !this.isShowUserList
+                    console.log(this)
+                    console.log(msg);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

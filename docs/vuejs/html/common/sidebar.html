@@ -1,0 +1,43 @@
+<div id="common-sidebar">
+    <ul>
+        <li v-for="(item, index) in items" :key="index">{{ item.name }}</li>
+    </ul>
+</div>
+
+<script>
+    export = {
+        data: function() {
+            return {
+                items: [{
+                        name: '菜单一'
+                    },
+                    {
+                        name: '菜单二'
+                    },
+                    {
+                        name: '菜单三'
+                    },
+                    {
+                        name: '菜单四'
+                    },
+                    {
+                        name: '菜单五'
+                    }
+                ]
+            }
+        },
+        methods: {
+            dd: function (msg) {
+                console.log(msg);
+            }
+        }
+    }
+</script>
+
+<style>
+    #common-sidebar {
+        width: 200px;
+        float: left;
+        border-right: 1px solid #ddd;
+    }
+</style>
