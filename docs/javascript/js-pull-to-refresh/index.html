@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="UTF-8" />
+        <title>原生JS实现下拉刷新</title>
+        <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;" />
+        <style>
+            div {
+                position: absolute;
+                top: 0px;
+                bottom: 0px;
+                width: 100%;
+                left: 0px;
+                overflow: hidden;
+            }
+
+            li {
+                list-style-type: none;
+                height: 35px;
+                background: gainsboro;
+                border-bottom: solid 1px #fff;
+                text-align: left;
+                line-height: 35px;
+                padding-left: 15px;
+            }
+
+            ul {
+                width: 100%;
+                margin-top: 0px;
+                position: absolute;
+                left: 0px;
+                padding: 0px;
+                top: 0px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="outerScroller">
+            <ul class="scroll">
+                <li>列表项1</li>
+                <li>列表项2</li>
+                <li>列表项3</li>
+                <li>列表项4</li>
+                <li>列表项5</li>
+                <li>列表项6</li>
+                <li>列表项7</li>
+                <li>列表项8</li>
+                <li>列表项9</li>
+                <li>列表项10</li>
+            </ul>
+        </div>
+        <script>
+            var scroll = document.querySelector('.scroll')
+            var outerScroller = document.querySelector('.outerScroller')
+            var touchStart = 0
+            var touchDis = 0
+            outerScroller.addEventListener(
+                'touchstart',
+                function (event) {
+                    var touch = event.targetTouches[0]
+                    // 把元素放在手指所在的位置
+                    touchStart = touch.pageY
+                    console.log(touchStart)
+                },
+                false
+            )
+            outerScroller.addEventListener(
+                'touchmove',
+                function (event) {
+                    var touch = event.targetTouches[0]
+                    console.log(touch.pageY + 'px')
+                    scroll.style.top = scroll.offsetTop + touch.pageY - touchStart + 'px'
+                    console.log(scroll.style.top)
+                    touchStart = touch.pageY
+                    touchDis = touch.pageY - touchStart
+                },
+                false
+            )
+            outerScroller.addEventListener(
+                'touchend',
+                function (event) {
+                    touchStart = 0
+                    var top = scroll.offsetTop
+                    console.log(top)
+                    if (top > 70) refresh()
+                    if (top > 0) {
+                        var time = setInterval(function () {
+                            scroll.style.top = scroll.offsetTop - 2 + 'px'
+                            if (scroll.offsetTop <= 0) clearInterval(time)
+                        }, 1)
+                    }
+                },
+                false
+            )
+
+            function refresh() {
+                // 这里是后台数据
+                for (var i = 3; i > 0; i--) {
+                    var node = document.createElement('li')
+                    node.innerHTML = "----新数据" + i
+                    scroll.insertBefore(node, scroll.firstChild)
+                }
+            }
+        </script>
+    </body>
+</html>
