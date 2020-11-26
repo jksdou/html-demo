@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>CSS 圆形进度转圈动画</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            .circle_process {
+                position: relative;
+                width: 290px;
+                height: 290px;
+            }
+
+            .circle_process .wrapper {
+                width: 145px;
+                height: 290px;
+                position: absolute;
+                top: 0;
+                overflow: hidden;
+            }
+
+            .circle_process .right {
+                right: 0;
+            }
+
+            .circle_process .left {
+                left: 0;
+            }
+
+            .circle_process .circle {
+                width: 198px;
+                height: 198px;
+                border: 46px solid #ffbc00;
+                border-radius: 100%;
+                position: absolute;
+                top: 0;
+                transform: rotate(-135deg);
+            }
+
+            .circle_process .rightcircle {
+                border-top: 46px solid #fd3f02;
+                border-right: 46px solid #fd3f02;
+                right: 0;
+                -webkit-animation: circle_right 3s linear infinite;
+            }
+
+            .circle_process .leftcircle {
+                border-bottom: 46px solid #fd3f02;
+                border-left: 46px solid #fd3f02;
+                left: 0;
+                -webkit-animation: circle_left 3s linear infinite;
+            }
+
+            @-webkit-keyframes circle_right {
+                0% {
+                    -webkit-transform: rotate(-135deg);
+                }
+
+                50%,
+                100% {
+                    -webkit-transform: rotate(45deg);
+                }
+            }
+
+            @-webkit-keyframes circle_left {
+                0%,
+                50% {
+                    -webkit-transform: rotate(-135deg);
+                }
+
+                100% {
+                    -webkit-transform: rotate(45deg);
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="circle_process">
+            <div class="wrapper right">
+                <div class="circle rightcircle"></div>
+            </div>
+            <div class="wrapper left">
+                <div class="circle leftcircle" id="leftcircle"></div>
+            </div>
+        </div>
+    </body>
+</html>
