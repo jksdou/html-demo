@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JS 进度条</title>
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" /> -->
+        <style>
+            .demo_div {
+                background-color: lightblue;
+                width: 0;
+                height: 20px;
+                line-height: 20px;
+            }
+            .demo_div.b {
+                background-color: rgb(255, 123, 0);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="demo_div1" class="demo_div">0px(0%)</div>
+        <button id="btn">像素值</button>
+        <hr />
+        <div id="demo_div2" class="demo_div b">0%</div>
+        <button id="btn2">百分数</button>
+        <script>
+            var timer
+            btn.onclick = function () {
+                demo_div1.style.width = '0'
+                cancelAnimationFrame(timer)
+                timer = requestAnimationFrame(function fn() {
+                    if (parseInt(demo_div1.style.width) < 500) {
+                        demo_div1.style.width = parseInt(demo_div1.style.width) + 5 + 'px'
+                        demo_div1.innerHTML = '' + demo_div1.style.width + '(' + parseInt(demo_div1.style.width) / 5 + '%)'
+                        timer = requestAnimationFrame(fn)
+                    } else {
+                        cancelAnimationFrame(timer)
+                    }
+                })
+            }
+            var timer2
+            var winWidth = document.body.clientWidth
+            btn2.onclick = function () {
+                var width = 0
+                demo_div2.style.width = '0'
+                cancelAnimationFrame(timer2)
+                timer2 = requestAnimationFrame(function fn() {
+                    if (width < winWidth) {
+                        width += 10
+                        demo_div2.style.width = (width / winWidth) * 100 + '%'
+                        demo_div2.innerHTML = parseInt((width / winWidth) * 100) + '%'
+                        timer2 = requestAnimationFrame(fn)
+                    } else {
+                        cancelAnimationFrame(timer2)
+                    }
+                })
+            }
+        </script>
+    </body>
+</html>
