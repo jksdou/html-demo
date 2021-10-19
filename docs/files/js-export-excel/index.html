@@ -2,11 +2,11 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>JS 将table数据导出到Excel文件下载</title>
-</head>
-
-<body>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="JS导出table数据到Excel文件" />
+    <title>JS导出table数据到Excel文件</title>
     <style>
         #tables {
             width: 100%;
@@ -24,7 +24,11 @@
             font-size: 14px;
             font-weight: bolder;
         }
+
     </style>
+</head>
+
+<body>
     <table id="tables">
         <thead>
             <tr>
@@ -54,15 +58,18 @@
     <script src="../../assets/lib/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="lib/tableExport.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="lib/base64.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script>
+        $("#export").click(function () {
+            // 导出
+            $("#tables").tableExport({
+                type: "excel",
+                fileName: 'aaa'
+            });
+        });
+
+    </script>
+
 </body>
 
 </html>
-<script>
-    $("#export").click(function () {
-        //导出
-        $("#tables").tableExport({
-            type: "excel",
-            fileName: 'aaa'
-        });
-    });
-</script>

@@ -12,10 +12,7 @@ function vueComponent(url, instance) {
             if (styleIndexEnd !== -1 && styleIndex !== -1) {
                 style = r.substring(styleIndex, styleIndexEnd)
                 style = style.substr(style.indexOf('>') + 1)
-                style =
-                    '<component scoped :is="\'style\'">' +
-                    style +
-                    '</component>'
+                style = '<component scoped :is="\'style\'">' + style + '</component>'
             }
             console.log('style', style)
             // JS
@@ -34,11 +31,7 @@ function vueComponent(url, instance) {
             console.log('template', template)
             if (style) {
                 var index = template.lastIndexOf('</')
-                if (index !== -1)
-                    template =
-                        template.substr(0, index) +
-                        style +
-                        template.substr(index)
+                if (index !== -1) template = template.substr(0, index) + style + template.substr(index)
             }
             instance.template = template
             // debugger

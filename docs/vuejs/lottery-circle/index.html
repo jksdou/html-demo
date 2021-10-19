@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幸运大转盘</title>
+    <style>
+        html,
+        #app {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        .lottery-circle {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            text-align: center;
+            margin: 0 auto;
+            /* background-image: url("img/mainbanner@2x.png");
+            background-repeat: no-repeat;
+            background-size: contain; */
+        }
+
+        /* .round-bg {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        } */
+
+        .turntable-img {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transition: all 4s;
+        }
+
+        .pointer-img {
+            position: absolute;
+            width: 104px;
+            height: 133px;
+            top: 110px;
+            transform: translate(-50%, 0);
+            cursor: pointer;
+        }
+
+        .disabled-click {
+            pointer-events: none;
+        }
+
+    </style>
+    <script src="../../assets/lib/vuejs/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="lottery-circle">
+            <!-- <img src="img/mainbanner@2x.png" alt="圆盘" class="round-bg" /> -->
+            <img src="img/mainbanner@2x.png" alt="转盘" class="turntable-img" :style="turntableStyle" />
+            <img src="img/needle.png" alt="指针" class="pointer-img" @click="poniterClick" :class="[offOn ? '' : 'disabled-click']" />
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                // 指针初始化指向位置角度
+                diff: 0,
+                rdm: 1800,
+                // 抽奖转盘是否可点击
+                offOn: true,
+                // 抽奖id对应转盘角度
+                prizeData: [{
+                        prizeId: '1',
+                        prizeName: 'a',
+                        deg: 337.5
+                    },
+                    {
+                        prizeId: '2',
+                        prizeName: 'b',
+                        deg: 112.5
+                    },
+                    {
+                        prizeId: '3',
+                        prizeName: 'c',
+                        deg: 247.5
+                    },
+                    {
+                        prizeId: '4',
+                        prizeName: 'd',
+                        deg: 67.5
+                    },
+                    {
+                        prizeId: '5',
+                        prizeName: 'e',
+                        deg: 292.5
+                    },
+                    {
+                        prizeId: '6',
+                        prizeName: 'f',
+                        deg: 157.5
+                    },
+                    {
+                        prizeId: '7',
+                        prizeName: '未中奖',
+                        deg: 22.5
+                    },
+                    {
+                        prizeId: '8',
+                        prizeName: '未中奖',
+                        deg: 202.5
+                    }
+                ],
+                turntableStyle: {}
+            },
+            methods: {
+                poniterClick() {
+                    console.log('点击旋转', )
+                    this.ratating(157.5, 6, 'f', '展示信息')
+                },
+                // 转盘旋转函数
+                // deg 转盘转动角度
+                // prizeId 由后端接口返回的奖品id，在 prizeData 数组中映射得出奖品名称与奖品所对应的转盘角度
+                // prizeName 奖品名称，由 prizeData 中映射得出
+                // msg 文本信息，在产品需求中用户抽奖后获奖或未获奖均有弹窗信息展示，此 msg 即为后端返回的展示信息
+                ratating(deg, prizeId, prizeName, msg) {
+                    let _this = this
+                    return new Promise((resolve, reject) => {
+                        // timer计时器
+                        let timer = null
+                        // 盛放奖品的里边转盘div
+                        // rdm初始的角度，默认1800，旋转5圈，deg是对应奖品的角度（转盘旋转完5圈后再次转多少°能转到对应的奖品），diff是如果连续可以抽多次，那么抽完一次后转盘指针距离一个整圈还差多少度，第二次点击抽奖让指针不用重置，从当前位置继续旋转，第一次旋转初始值为0
+                        this.rdm = this.rdm + Number(deg) + this.diff
+                        // 控制抽奖按钮是否可以点击，转盘旋转结束后可以再次点击
+                        this.offOn = false
+                        clearInterval(timer)
+                        // 旋转时长，这里倒计时的时长和css设置的时长对应(transition: all 4s;)
+                        timer = setInterval(function () {
+                            _this.turntableStyle = {
+                                transform: 'rotate(' + _this.rdm + 'deg)'
+                            }
+                            clearInterval(timer)
+                            setTimeout(function () {
+                                if (_this.luckNum > 0) {
+                                    _this.diff = 360 - deg
+                                    _this.rdm += 1800
+                                }
+                                _this.diff = 360 - deg
+                                _this.rdm += 1800
+                                // 控制抽奖按钮是否可以点击，转盘旋转结束后可以再次点击
+                                _this.offOn = true
+                                resolve({
+                                    prizeId,
+                                    prizeName,
+                                    msg
+                                })
+                            }, 4000)
+                        }, 20)
+                    })
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>
