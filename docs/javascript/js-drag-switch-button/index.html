@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 拖动开关按钮</title>
+    <style>
+        .box {
+            width: 500px;
+            margin: 100px auto;
+        }
+
+        .slider {
+            width: 150px;
+            height: 50px;
+            border-radius: 50px;
+            position: relative;
+            box-shadow: 2px 1px 18px -8px #333;
+            background-color: #19ADF4;
+        }
+
+        .circle {
+            width: 75px;
+            height: 50px;
+            border-radius: 50px;
+            position: absolute;
+            background-color: #fff;
+            box-shadow: 2px 1px 18px -8px #333;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="slider">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <script>
+        var slider = document.querySelector(".slider")
+        var circle = document.querySelector(".circle")
+        // 滑块可滑动的最大值
+        var circle_x_max = slider.offsetWidth - circle.offsetWidth
+        slider.addEventListener("mousedown", function () {
+            this.onmousemove = function (e) {
+                // 鼠标当前在slider中的坐标
+                var mouse_x = e.pageX - this.offsetLeft
+                var circle_x = mouse_x - circle.offsetWidth / 2
+                if (circle_x >= circle_x_max) {
+                    circle_x = circle_x_max
+                } else if (circle_x <= 0) {
+                    circle_x = 0
+                }
+                circle.style.left = circle_x + 'px'
+            }
+        })
+        // 加上鼠标放手和鼠标跑出滑块的监听,防止鼠标松手,滑块事件没有完全解绑
+        slider.addEventListener("mouseup", function (e) {
+            // 放手时获取滑块当前位置
+            // 如果大于可滑动总长度的一半就跑右面否则回左面
+            if (circle.offsetLeft >= circle_x_max / 2) {
+                circle.style.left = circle_x_max + 'px'
+            } else {
+                circle.style.left = "0px"
+            }
+            this.onmousemove = null
+            this.onmousedown = null
+            this.onmouseup = null
+        })
+        slider.onmouseover = function () {
+            this.onmousemove = null
+            this.onmousedown = null
+            this.onmouseup = null
+        }
+
+    </script>
+</body>
+
+</html>
