@@ -1,99 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 
-<head lang="en">
-  <meta charset="UTF-8">
-  <title></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
-  />
-  <meta name="format-detection" content="telephone=no" />
-  <style>
-    .input-radio-label {
-      display: inline-block;
-    }
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <style>
+        .input-radio-label {
+            display: inline-block;
+        }
 
-    .input-radio {
-      width: 1.4rem;
-      height: 1.4rem;
-      margin: 0;
-      outline: none;
-      box-sizing: border-box;
-      -webkit-appearance: none;
-      vertical-align: middle;
-      border: 1px solid #dcdcdc;
-      display: inline-block;
-      border-radius: 50%;
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
+        .input-radio {
+            width: 1.4rem;
+            height: 1.4rem;
+            margin: 0;
+            outline: none;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            vertical-align: middle;
+            border: 1px solid #dcdcdc;
+            display: inline-block;
+            border-radius: 50%;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .input-radio[type='radio']:checked {
-      -webkit-appearance: none;
-    }
+        .input-radio[type='radio']:checked {
+            -webkit-appearance: none;
+        }
 
-    .input-radio[type='radio']:checked:after {
-      content: '';
-      width: 1rem;
-      height: 1rem;
-      background: #ff6a2e;
-      border-radius: 50%;
-    }
-  </style>
+        .input-radio[type='radio']:checked:after {
+            content: '';
+            width: 1rem;
+            height: 1rem;
+            background: #ff6a2e;
+            border-radius: 50%;
+        }
+
+    </style>
 </head>
 
 <body>
-  <div>选择</div>
-  <label class="input-radio-continer">
-      <input class="input-radio" type="radio" name="radio" value="A">
-      <div class="input-radio-label">radio单选项A</div>
+    <div>选择</div>
+    <label class="input-radio-continer">
+        <input class="input-radio" type="radio" name="radio" value="A">
+        <div class="input-radio-label">radio单选项A</div>
     </label>
-  <label class="input-radio-continer">
-      <input class="input-radio" type="radio" name="radio" value="B">
-      <div class="input-radio-label">radio单选项B</div>
+    <label class="input-radio-continer">
+        <input class="input-radio" type="radio" name="radio" value="B">
+        <div class="input-radio-label">radio单选项B</div>
     </label>
-  <script>
-    //获取剪贴板数据方法
-    function getClipboardText(event) {
-      var clipboardData = event.clipboardData || window.clipboardData;
-      return clipboardData.getData("text");
-    };
+    <script>
+        //获取剪贴板数据方法
+        function getClipboardText(event) {
+            var clipboardData = event.clipboardData || window.clipboardData;
+            return clipboardData.getData("text");
+        };
 
-    //设置剪贴板数据
-    function setClipboardText(event, value) {
-      if (event.clipboardData) {
-        return event.clipboardData.setData("text/plain", value);
-      } else if (window.clipboardData) {
-        return window.clipboardData.setData("text", value);
-      }
-    };
+        //设置剪贴板数据
+        function setClipboardText(event, value) {
+            if (event.clipboardData) {
+                return event.clipboardData.setData("text/plain", value);
+            } else if (window.clipboardData) {
+                return window.clipboardData.setData("text", value);
+            }
+        };
 
-    var oInp = document.getElementById("inp");
-    var btn = document.getElementById("btn");
+        var oInp = document.getElementById("inp");
+        var btn = document.getElementById("btn");
 
-    function setClipboardText(event, value) {
-      if (event.clipboardData) {
-        alert(1);
-        return event.clipboardData.setData("text/plain", value);
-      } else if (window.clipboardData) {
-        alert(2);
-        return window.clipboardData.setData("text", value);
-      } else {
-        alert(4);
-      }
-    };
-    function abc() {
-      alert(3);
-      var event = event || window.event;
-      setClipboardText(event, oInp.value);
-    }
+        function setClipboardText(event, value) {
+            if (event.clipboardData) {
+                alert(1);
+                return event.clipboardData.setData("text/plain", value);
+            } else if (window.clipboardData) {
+                alert(2);
+                return window.clipboardData.setData("text", value);
+            } else {
+                alert(4);
+            }
+        };
 
-    window.onload = function () {
-      oInp.addEventListener('copy', abc, false);
-      btn.addEventListener('click', abc, false);
-    }
-  </script>
+        function abc() {
+            alert(3);
+            var event = event || window.event;
+            setClipboardText(event, oInp.value);
+        }
+
+        window.onload = function () {
+            oInp.addEventListener('copy', abc, false);
+            btn.addEventListener('click', abc, false);
+        }
+
+    </script>
 
 
 
