@@ -4,7 +4,6 @@
 
 在线预览：
 
+Cloudflare Pages: [https://html-demo.tk](https://html-demo.tk/)
+
 Github Pages: [https://doudoudzj.github.io/html-demo](https://doudoudzj.github.io/html-demo/)
-
-Cloudflare Pages: [https://html-demo.pages.dev](https://html-demo.pages.dev/)
-
