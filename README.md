@@ -4,6 +4,6 @@
 
 在线预览：
 
-Cloudflare Pages: [https://html-demo.tk](https://html-demo.tk/)
+1. [html-demo.tk](https://html-demo.tk/)（Cloudflare Pages + 免费 TK 域名）
 
-Github Pages: [https://doudoudzj.github.io/html-demo](https://doudoudzj.github.io/html-demo/)
+2. [doudoudzj.github.io/html-demo](https://doudoudzj.github.io/html-demo/)（Github Pages）
