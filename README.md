@@ -1,6 +1,6 @@
 # HTML DEMO
 
-> 前端 HTML、JS、CSS 代码片段 演示代码 demo
+> HTML、JS、CSS 前端代码片段 演示代码 demo
 
 在线预览：
 
