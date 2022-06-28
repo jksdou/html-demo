@@ -16,40 +16,40 @@
 </head>
 
 <body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href=".">HTML DEMO</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <p class="navbar-text">前端HTML、JS、CSS代码片段演示代码demo</p>
+                <!-- <ul class="nav navbar-nav">
+                    <p class="navbar-text">代码片段、示例代码</p>
+                    <li class="active"><a href="#">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul> -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="https://html-tools.tk" target="_blank">网页工具大全</a></li>
+                    <li><a href="https://github.com/jksdou/html-demo/" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
     <div id="app">
-        <div class="container">
-            <nav class="navbar navbar-default">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href=".">HTML DEMO</a>
-                </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <p class="navbar-text">前端HTML、JS、CSS代码片段演示代码demo</p>
-                    <!-- <ul class="nav navbar-nav">
-                        <p class="navbar-text">代码片段、示例代码</p>
-                        <li class="active"><a href="#">Home</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Nav header</li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
-                    </ul> -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="https://html-tools.tk" target="_blank">网页工具大全</a></li>
-                        <li><a href="https://github.com/doudoudzj/html-demo/" target="_blank">GitHub</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-3" v-for="(item, index) in nav" :key="index">
@@ -68,16 +68,16 @@
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container">
-                <p class="text-muted">
-                    <span>&copy; 2017-present <a href="https://github.com/doudoudzj/" target="_blank">Jackson Dou</a></span>
-                    <span class="hidden-xs"> All Rights Reserved.</span>
-                    <span class="pull-right"><a href="https://doudoudzj.com/" target="_blank">生活</a> &bull; <a href="https://uinote.com/" target="_blank">技术</a> &bull; <a href="https://crogram.org/" target="_blank">开源</a></span>
-                </p>
-            </div>
-        </footer>
     </div>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">
+                <span>&copy; 2017-present <a href="https://github.com/jksdou/" target="_blank">Jackson Dou</a></span>
+                <span class="hidden-xs"> All Rights Reserved.</span>
+                <span class="pull-right"><a href="https://doudoudzj.com/" target="_blank">生活</a> &bull; <a href="https://uinote.com/" target="_blank">技术</a> &bull; <a href="https://crogram.org/" target="_blank">开源</a></span>
+            </p>
+        </div>
+    </footer>
     <script src="assets/lib/vuejs/vue.min.js"></script>
     <script src="assets/lib/jquery/jquery.min.js"></script>
     <script src="assets/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -126,7 +126,7 @@
                         }, {
                             title: 'HTML源码直接预览',
                             path: 'textarea-code-to-html/'
-                        }, ]
+                        }]
                     }, {
                         id: 'demo-css',
                         title: 'CSS',
@@ -167,7 +167,10 @@
                         }, {
                             title: 'CSS圆形进度转圈动画',
                             path: 'css-circle-process/'
-                        }, ]
+                        }, {
+                            title: 'CSS 春节灯笼特效',
+                            path: 'css-denglong/'
+                        }]
                     }, {
                         id: 'demo-js',
                         title: 'JavaScript',
