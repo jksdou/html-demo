@@ -6,4 +6,4 @@
 
 1. [html-demo.tk](https://html-demo.tk/)（Cloudflare Pages + 免费 TK 域名）
 
-2. [doudoudzj.github.io/html-demo](https://doudoudzj.github.io/html-demo/)（Github Pages）
+2. [jksdou.github.io/html-demo](https://jksdou.github.io/html-demo/)（Github Pages）
