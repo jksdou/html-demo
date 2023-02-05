@@ -4,6 +4,6 @@
 
 在线预览：
 
-1. [html-demo.tk](https://html-demo.tk/)（Cloudflare Pages + 免费 TK 域名）
+1. [html-demo.uiisc.org](https://html-demo.uiisc.org/)（Cloudflare Pages）
 
 2. [jksdou.github.io/html-demo](https://jksdou.github.io/html-demo/)（Github Pages）
